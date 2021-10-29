@@ -13,13 +13,15 @@ public class Projectiles {
 	private String BULLET_TYPE; 
 	
 	
-	
+	/*
 	public Projectiles(String bullet, Direction d, int damage) {
 //		this.direction = d;
 		this.DAMAGE = damage; 
 		this.BULLET_TYPE = bullet; 
 		
 	}
+	*/
+	
 	public GImage getSprite() {
 		return sprite;
 	}
