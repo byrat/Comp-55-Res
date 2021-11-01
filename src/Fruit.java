@@ -2,6 +2,7 @@ public enum Fruit {
 		STRAWBERRY(""), 
 		BANANA(""),
 		MELON(""),
+		PINEAPPLE(""),
 		;
 		
 		private final String imageFilePath;
