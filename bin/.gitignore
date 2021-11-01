@@ -3,8 +3,10 @@
 /GParagraph.class
 /GraphicsPane.class
 /Interfaceable.class
+/Location.class
 /MainApplication.class
 /MenuPane.class
-/SomePane.class
-/Location.class
 /Projectiles.class
+/SomePane.class
+/Weapon.class
+/Direction.class
