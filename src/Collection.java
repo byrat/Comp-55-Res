@@ -19,12 +19,24 @@ public class Collection extends GraphicsPane{
 	}
 	
 	ArrayList <GImage> Fruits = new ArrayList<GImage>(); 
-	
-	GImage banana = new GImage("media/fruits/banana.png" , 300 , 300);
-	
-	GImage melon = new GImage("media/fruits/melon.png" , 350 , 350);
+	Collection(){
+		GImage banana = new GImage("media/fruits/banana.png" , 300 , 300);
 		
-	Gimage
+		GImage melon = new GImage("media/fruits/melon.png" , 350 , 350);
+			
+		GImage pineapple = new GImage("media/fruits/melon.png", 400, 400);
+		
+		GImage strawberry = new GImage("media/fruits/strawberry.png" , 500, 500);
+		
+		Fruits.add(banana);
+		Fruits.add(melon);
+		Fruits.add(pineapple);
+		Fruits.add(strawberry);
+		
+	}
+	
+	
+	
 	
 
 	@Override

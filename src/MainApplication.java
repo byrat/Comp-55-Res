@@ -11,6 +11,7 @@ public class MainApplication extends GraphicsProgram {
 	private GraphicsPane curScreen;
 	private SomePane somePane;
 	private MenuPane menu;
+	private Collection collection;
 	
 	/* Method: setupInteractions
 	 * -------------------------
@@ -111,7 +112,7 @@ public class MainApplication extends GraphicsProgram {
 	}
 
 	public void switchToSome() {
-		switchToScreen(somePane);
+		switchToScreen(collection);
 	}
 
 	public static void main(String[] args) {

@@ -22,6 +22,7 @@ public class MenuPane extends GraphicsPane {
 	@Override
 	public void showContents() {
 		program.add(rect);
+		
 	}
 
 	@Override
