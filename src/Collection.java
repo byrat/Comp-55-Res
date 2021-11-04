@@ -1,5 +1,8 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import acm.graphics.GImage;
 
 public class Collection extends GraphicsPane{
 	
@@ -14,6 +17,14 @@ public class Collection extends GraphicsPane{
 		 
 		
 	}
+	
+	ArrayList <GImage> Fruits = new ArrayList<GImage>(); 
+	
+	GImage banana = new GImage("media/fruits/banana.png" , 300 , 300);
+	
+	GImage melon = new GImage("media/fruits/melon.png" , 350 , 350);
+		
+	Gimage
 	
 
 	@Override
