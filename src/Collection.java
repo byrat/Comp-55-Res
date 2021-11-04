@@ -1,20 +1,31 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public class Collection {
-	private Set<Fruit> set;
-
-	public Collection () {
-		set = new HashSet <Fruit>();
+public class Collection extends GraphicsPane{
+	
+	boolean [] FruitLog = new boolean[4];
+	/*STRAWBERRY(""), 
+	BANANA(""),
+	MELON(""),
+	PINEAPPLE(""),*/
+	
+	public void UpdateCollection(int x) {
+		 FruitLog[x] = true;
+		 
 		
 	}
 	
-	public void addFruit(Fruit fruit) {
-		set.add(fruit);
+
+	@Override
+	public void showContents() {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	public void clearFruit(Fruit fruit) {
-		set.clear();
+
+	@Override
+	public void hideContents() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

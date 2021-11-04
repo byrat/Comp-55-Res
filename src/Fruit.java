@@ -1,3 +1,4 @@
+
 public enum Fruit {
 		STRAWBERRY(""), 
 		BANANA(""),
@@ -14,5 +15,10 @@ public enum Fruit {
 		public String getImage() {
 			return imageFilePath;
 		}
+		public void onCollison(){
+			
+		}
 	}
+
+
 
