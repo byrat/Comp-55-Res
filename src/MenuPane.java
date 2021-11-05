@@ -21,6 +21,7 @@ public class MenuPane extends GraphicsPane {
 	private GButton SETTINGS_BUTTON;
 	private GImage SETTINGS;
 	private final int BUTTON_SIZE = 50;
+	public int OPTION;
 
 	public MenuPane(MainApplication app) {
 		super();
@@ -62,7 +63,14 @@ public class MenuPane extends GraphicsPane {
 	@Override
 	public void hideContents() {
 		//program.remove(rect);
-		program.add(MAIN_MENU);
+		program.remove(MAIN_MENU);
+		program.remove(TITLE);
+		program.remove(PLAY_BUTTON);
+		program.remove(PLAY);
+		program.remove(COLLECTIONS_BUTTON);
+		program.remove(COLLECTIONS);
+		program.remove(SETTINGS_BUTTON);
+		program.remove(SETTINGS);
 	}
 
 	@Override
@@ -73,8 +81,16 @@ public class MenuPane extends GraphicsPane {
 //		}
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == PLAY_BUTTON) {
+			
 			program.switchToSome();
 		}
 		
+	}
+	public void setOption(int option) {
+		this.OPTION = option;
+	}
+	
+	public int getOption() {
+		return OPTION;
 	}
 }

@@ -112,7 +112,15 @@ public class MainApplication extends GraphicsProgram {
 	}
 
 	public void switchToSome() {
-		switchToScreen(collection);
+		if (menu.getOption() == 1) {
+			//switchToScreen();
+		}
+		if (menu.getOption() == 2) {
+			switchToScreen(collection);
+		}
+		if (menu.getOption() == 3) {
+			//switchToScreen();
+		}
 	}
 
 	public static void main(String[] args) {
