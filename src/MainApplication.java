@@ -100,7 +100,7 @@ public class MainApplication extends GraphicsProgram {
 	}
 
 	public void run() {
-		System.out.println("Let's make something awesome!");
+		//System.out.println("Let's make something awesome!");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		setupInteractions();
