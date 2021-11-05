@@ -4,13 +4,14 @@ import acm.program.GraphicsProgram;
 
 public class MainApplication extends GraphicsProgram {
 	
-	public static final int WINDOW_WIDTH = 800;
-	public static final int WINDOW_HEIGHT = 600;
+	public static final int WINDOW_WIDTH = 1920;//800;
+	public static final int WINDOW_HEIGHT = 1080;//600;
 	public static final String MUSIC_FOLDER = "sounds";
 
 	private GraphicsPane curScreen;
 	private SomePane somePane;
 	private MenuPane menu;
+	private Collection collection;
 	
 	/* Method: setupInteractions
 	 * -------------------------
@@ -99,7 +100,7 @@ public class MainApplication extends GraphicsProgram {
 	}
 
 	public void run() {
-		System.out.println("Let's make something awesome!");
+		//System.out.println("Let's make something awesome!");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		setupInteractions();
@@ -111,7 +112,15 @@ public class MainApplication extends GraphicsProgram {
 	}
 
 	public void switchToSome() {
-		switchToScreen(somePane);
+		if (menu.getOption() == 1) {
+			//switchToScreen();
+		}
+		if (menu.getOption() == 2) {
+			switchToScreen(collection);
+		}
+		if (menu.getOption() == 3) {
+			//switchToScreen();
+		}
 	}
 
 	public static void main(String[] args) {
