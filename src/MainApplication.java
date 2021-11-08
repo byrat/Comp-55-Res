@@ -9,9 +9,11 @@ public class MainApplication extends GraphicsProgram {
 	public static final String MUSIC_FOLDER = "sounds";
 
 	private GraphicsPane curScreen;
+	private GraphicsGame playGame;
 	private SomePane somePane;
 	private MenuPane menu;
 	private Collection collection;
+	private CollectonMenu collectionMenu;
 	private SettingsMenu settings;
 	
 	/* Method: setupInteractions
@@ -116,10 +118,10 @@ public class MainApplication extends GraphicsProgram {
 	public void switchToSome() {
 		//switchToScreen(somePane);
 		if (menu.getOption() == 1) {
-			//switchToScreen();
+			switchToScreen(playGame);
 		}
 		else if (menu.getOption() == 2) {
-			switchToScreen(collection);
+			//switchToScreen(collectionMenu);
 		}
 		else if (menu.getOption() == 3) {
 			switchToScreen(settings);
