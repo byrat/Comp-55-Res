@@ -10,24 +10,26 @@ public class Player {
 	public static final String VERTICAL_IMG_FILENAME = "_vert";
 
 
-	private int health = 100;
-	private int ammoAmt = 0;
-	private int x = 0;
-	private int y = 0;
+	private int health;
+	private int ammo;
+	private int xCoordinate = 0;
+	private int yCoordinate = 0;
 	
 	
 	private Weapon banana;
 	private Location location;
 	
-	private GImage image = new GImage("media/MonkeyPics/MonkeySprite.png");
-	private GImage image2 = new GImage("media/MonkeyPics/banana.png");
+	private GImage image = new GImage("media/characters/monkey.png");
+	// private GImage image2 = new GImage("media/MonkeyPics/banana.png");
 	
 	
 	
-	public Player (Location xCordinate, Location yCoordinate, int health, int ammo) {
-		xCordinate.setXAxis(x);
-		yCoordinate.setYAxis(y);
-		
+	public Player (int xCordinate, int yCoordinate, int health, int ammo) {
+		location = new Location(xCordinate, yCoordinate);
+		this.xCoordinate = xCordinate;
+		this.yCoordinate = yCoordinate;
+		this.health = health;
+		this.ammo = ammo;
 	}
 		
 
@@ -38,7 +40,7 @@ public class Player {
 	}
 	
 	public void setAmmo (int ammo) {
-		this.ammoAmt = ammo;
+		this.ammo = ammo;
 	}
 	
 	public Location getLocation() {
@@ -50,23 +52,20 @@ public class Player {
 		return banana;
 	}
 	
-	public void updateLocation() {
-		location.setXAxis(location.getXAxis());
-		location.setYAxis(location.getYAxis());
+	//! Temp Function
+	public void updatePlayerLocation(int xCoordinate, int yCoordinate) {
+		location.updateLocation(xCoordinate, yCoordinate);
 	}
+
+	// public void updateLocation() {
+	// 	location.setXAxis(location.getXAxis());
+	// 	location.setYAxis(location.getYAxis());
+	// }
 	
 	public static void main(String[] args) {
 		Location firstTest = new Location(2,3);
 		System.out.print("X Location: " + firstTest.getXAxis() + "\n");
 		
 		System.out.print("Y Location: " + firstTest.getYAxis());
-		
-		
-		
-	
 	}
-
-	
-	
-	
 }
