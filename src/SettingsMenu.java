@@ -140,13 +140,13 @@ public class SettingsMenu extends GraphicsPane {
 			MC_OFF.setFillColor(Color.WHITE);
 			MC_ON.setFillColor(new Color(255,225,53));
 
-			// PASS THIS VALUE TO WHERE SOUNDS IS DETERMINED
+			// PASS THIS VALUE TO WHERE MUSIC IS DETERMINED
 		}
 		else if(obj == MC_OFF) {
 			MC_ON.setFillColor(Color.WHITE);
 			MC_OFF.setFillColor(new Color(255,225,53));
 
-			// PASS THIS VALUE TO WHERE SOUNDS IS DETERMINED
+			// PASS THIS VALUE TO WHERE MUSIC IS DETERMINED
 		}
 	
 	}
