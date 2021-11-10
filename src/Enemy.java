@@ -32,10 +32,12 @@ public class Enemy { // TODO Implement the other classes this one needs
 
     public Enemy(double seconds, double firingRate, Difficulty difficulty, String msg, boolean isBoss) { //! Delete the String MSG Parameter
         // firingRate = 1 * difficulty=0.75 ==> 0.75sec
-        this.firingRate = firingRate * difficulty.Difficulty(); 
+        this.firingRate = firingRate * difficulty.Difficulty();
+ 
         this.msg = msg; //! Delete this later
         
         if (isBoss == false) {
+        	//?? I NEED TO ADD GETDIFFICULTY LATER ON - JT
             if (difficulty == Difficulty.EASY) {
                 enemySprite = new GImage(IMG_PATH + "hunter easy" + IMG_PNG_SUFFIX);
             } else if (difficulty == Difficulty.MEDIUM) {
@@ -65,10 +67,11 @@ public class Enemy { // TODO Implement the other classes this one needs
         // TODO implement logic: If Enemy == dead --> enemyTimer.cancel()
         return true; //! Change this later
     }
-
+    
     public static void main(String[] args) {
         // Test Code
         new Enemy(1, 1, Difficulty.IMPOSSIBLE, "Dam Eyman", false); //! Delete String Parameter
         new Enemy(2.5, 1, Difficulty.EASY, "Wow Gene", false); //! Delete String Parameter
+   
     }
 }

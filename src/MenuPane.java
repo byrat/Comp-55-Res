@@ -85,6 +85,8 @@ public class MenuPane extends GraphicsPane {
 		program.remove(COLLECTIONS);
 		program.remove(SETTINGS_BUTTON);
 		program.remove(SETTINGS);
+		program.remove(QUIT);
+		program.remove(QUIT_BUTTON);
 	}
 
 	@Override
