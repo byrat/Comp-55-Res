@@ -3,6 +3,8 @@ import acm.graphics.GImage;
 public enum Difficulty {
     EASY, MEDIUM, HARD, IMPOSSIBLE;
 	
+	private static double difficultyValue; 
+
 	public double Difficulty() {
 		switch(this) {
 			case EASY: return 1;

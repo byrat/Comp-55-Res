@@ -85,6 +85,8 @@ public class MenuPane extends GraphicsPane {
 		program.remove(COLLECTIONS);
 		program.remove(SETTINGS_BUTTON);
 		program.remove(SETTINGS);
+		program.remove(QUIT);
+		program.remove(QUIT_BUTTON);
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class MenuPane extends GraphicsPane {
 //			program.switchToSome();
 //		}
 		if (obj == PLAY_BUTTON && obj instanceof GButton) {
-			program.switchToSome();
+			program.SwitchToGame();
 			setOption(1);
 		}
 		if (obj == COLLECTIONS_BUTTON && obj instanceof GButton) {

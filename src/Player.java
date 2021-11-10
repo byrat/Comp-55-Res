@@ -12,24 +12,30 @@ public class Player {
 
 	private int health;
 	private int ammo;
-	private int xCoordinate = 0;
-	private int yCoordinate = 0;
+	private int x = 0;
+	private int y = 0;
+	private double dx , dy;
 	
-	
+	private boolean HasJumped;
 	private Weapon banana;
 	private Location location;
+	private MainApplication program;
 	
-	private GImage image = new GImage("media/characters/monkey.png");
+	private GImage image;
 	// private GImage image2 = new GImage("media/MonkeyPics/banana.png");
 	
 	
 	
-	public Player (int xCordinate, int yCoordinate, int health, int ammo) {
-		location = new Location(xCordinate, yCoordinate);
-		this.xCoordinate = xCordinate;
-		this.yCoordinate = yCoordinate;
+	public Player (MainApplication app, int x, int y, int health, int ammo) {
+		program = app;
+		image = new GImage("media/characters/monkey.png", x , y);
+		location = new Location(x, y);
+		this.x = x;
+		this.y = y;
 		this.health = health;
 		this.ammo = ammo;
+		HasJumped = false;
+		
 	}
 		
 
@@ -56,7 +62,33 @@ public class Player {
 	public void updatePlayerLocation(int xCoordinate, int yCoordinate) {
 		location.updateLocation(xCoordinate, yCoordinate);
 	}
-
+	public void update() {
+		image.move(dx, dy);
+	}
+	public void updateVel(double x, double y) {
+		if(dy != 0 && HasJumped == true) {
+			dy += -5;
+		}
+		else if(dy != 0 && HasJumped == false) {
+			dy += 5;
+		}
+		else if (dy >= 30) {
+			HasJumped = true;
+		}
+		else if(dy == 0) {
+			HasJumped = false;
+			dy += y;
+		}
+		dx += x;
+		
+	}
+	
+	public void show() {
+		program.add(image);
+	}
+	public void hide() {
+		program.remove(image);
+	}
 	// public void updateLocation() {
 	// 	location.setXAxis(location.getXAxis());
 	// 	location.setYAxis(location.getYAxis());

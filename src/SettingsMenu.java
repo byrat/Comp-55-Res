@@ -6,8 +6,11 @@ import acm.graphics.GObject;
 
 public class SettingsMenu extends GraphicsPane {
 	// you will use program to get access to all of the GraphicsProgram calls
-	private MainApplication program; 
+	Enemy enemy;
+	Difficulty d;
+	
 
+	private MainApplication program; 
 	private GImage img;
 	private GParagraph para;
 	private GImage SCREEN;
@@ -24,6 +27,7 @@ public class SettingsMenu extends GraphicsPane {
 	private GButton MC_OFF;
 	private GImage RETURN;
 	private GButton RETURN_BUTTON;
+
 
 	public SettingsMenu(MainApplication app) {
 		this.program = app;
@@ -97,6 +101,13 @@ public class SettingsMenu extends GraphicsPane {
 		program.remove(RETURN);
 		program.remove(RETURN_BUTTON);
 	}
+	
+	public void setDifficulty(Difficulty d) {
+		this.d = d;
+	}
+	public Difficulty getDifficulty(){
+		return d;
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -110,19 +121,22 @@ public class SettingsMenu extends GraphicsPane {
 			HARD.setFillColor(Color.WHITE);
 			EASY.setFillColor(new Color(255,225,53));
 			// PASS THIS VALUE TO WHERE DIFFICULTY IS DETERMINED
+			setDifficulty(Difficulty.EASY);
 		}
 		else if(obj == MEDIUM) {
 			HARD.setFillColor(Color.WHITE);
 			EASY.setFillColor(Color.WHITE);
 			MEDIUM.setFillColor(new Color(255,225,53));
 			// PASS THIS VALUE TO WHERE DIFFICULTY IS DETERMINED
+			setDifficulty(Difficulty.MEDIUM);
+
 		}
 		else if(obj == HARD) {
 			MEDIUM.setFillColor(Color.WHITE);
 			EASY.setFillColor(Color.WHITE);
 			HARD.setFillColor(new Color(255,225,53));
-
 			// PASS THIS VALUE TO WHERE DIFFICULTY IS DETERMINED
+			setDifficulty(Difficulty.HARD);
 		}
 		if(obj == FX_ON) {
 			FX_OFF.setFillColor(Color.WHITE);

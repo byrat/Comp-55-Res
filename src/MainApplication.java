@@ -13,6 +13,7 @@ public class MainApplication extends GraphicsProgram {
 	private MenuPane menu;
 	private CollectionMenu collection;
 	private SettingsMenu settings;
+	private GraphicsGame game;
 	
 	/* Method: setupInteractions
 	 * -------------------------
@@ -105,6 +106,7 @@ public class MainApplication extends GraphicsProgram {
 		somePane = new SomePane(this);
 		settings = new SettingsMenu(this);
 		menu = new MenuPane(this);
+		game = new GraphicsGame(collection , this);
 		collection = new CollectionMenu(this);
 		setupInteractions();
 		switchToMenu();
@@ -132,5 +134,8 @@ public class MainApplication extends GraphicsProgram {
 
 	public static void main(String[] args) {
 		new MainApplication().start();
+	}
+	public void SwitchToGame() {
+		switchToScreen(game);
 	}
 }
