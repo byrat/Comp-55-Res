@@ -17,8 +17,10 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Collection CollectionMenu;
 	GImage Background;
 	MainApplication program;
+	private Projectiles projectile;
 	Player player;
 	Timer timer;
+	Weapon weapon;
 	
 	public void UpdateLog(int x) {
 		if (FruitLog[x] == false) {
@@ -36,6 +38,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		Background = new GImage("media/fruits/map.png" , 0 ,0);
 		///this.CollectionMenu = collection;
 		player = new Player (program , 200 ,200 ,5 ,5);
+		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
+		projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
+		
 	}
 	public boolean collision(GRect boxA, GRect boxB) {
 		double minX = boxA.getX();
@@ -58,6 +63,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		// TODO Auto-generated method stub
 		program.add(Background);
 		player.show();
+		weapon.show();
 		
 		///Start game loop
 		timer = new Timer (10 , this);
@@ -91,6 +97,10 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		}
 		if (key == KeyEvent.VK_SPACE) {
 			player.updateVel(0, 5);
+		}
+		// CAN ALWAYS CHANGE FROM 'D' to fire. 
+		if (key == KeyEvent.VK_D) {
+			projectile.
 		}
 	}
 
