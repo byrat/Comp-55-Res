@@ -40,22 +40,22 @@ public class CollectionMenu extends GraphicsPane {
 		COLLECT.sendToBack();
 		
 		//Banana as a button so when users press on it's description pops up.
-		BANANA = new GImage ("media/fruits/banana.png" , 50 ,300);
-		BANANA_D = new GImage("media/fruits/banana_d.png" , 100 , 300);
+		BANANA = new GImage ("media/fruits/banana_b.png" , 350 ,190);
+		BANANA_D = new GImage("media/fruits/banana_d.png" , 350 , 500);
 		
 		
 		//Same as banana
-		MELON = new GImage("media/fruits/melon.png" , 600 , 90);
-		MELON_D = new GImage("media/fruits/melon_d.png", 300 , 300);
+		MELON = new GImage("media/fruits/watermelon_b.png" , 1000 , 220);
+		MELON_D = new GImage("media/fruits/melon_d.png", 440 , 500);
 		
 		//Same as banana
-		PINEAPPLE = new GImage("media/fruits/pineapple.png" , 550 , 270);
-		PINEAPPLE_D = new GImage("media/fruits/pineapple_d.png" , 300 , 300);
+		PINEAPPLE = new GImage("media/fruits/pineapple_b.png" , 650 , 200);
+		PINEAPPLE_D = new GImage("media/fruits/pineapple_d.png" , 340 , 500);
 		
 		
 		//Same as banana
-		STRAWBERRY = new GImage("media/fruits/strawberry.png" , 10 , 50);
-		STRAWBERRY_D = new GImage("media/fruits/strawberry_d.png" , 300 , 300);
+		STRAWBERRY = new GImage("media/fruits/strawberry_b.png" , 10 , 150);
+		STRAWBERRY_D = new GImage("media/fruits/strawberry_d.png" , 340 , 500);
 		
 		//Image for the locked fruits
 		LOCKED = new GImage ("media/fruits/Locked.gif", 300 ,300);
