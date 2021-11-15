@@ -100,8 +100,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
         if(DISTANCE_X < 0) {
         	DISTANCE_X = 0;
         }
-        if(DISTANCE_X > MAP_WIDTH) { 
-        	DISTANCE_X = MAP_WIDTH;
+        if(DISTANCE_X > 4670) { 
+        	DISTANCE_X = 4670;
         }
         if(DISTANCE_Y < 0) { 
         	DISTANCE_Y = 0;
@@ -111,7 +111,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
         }
     }
 	public double validMoveLeft(int x) {
-		if(DISTANCE_X <= 0 || DISTANCE_X > 5000) {
+		if(DISTANCE_X <= 0 || DISTANCE_X > 4670) {
 			return 0;	
 		}
 		else {
@@ -120,7 +120,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		return -7;
 	}
 	public double validMoveRight(int x) {
-		if(DISTANCE_X < 0 || DISTANCE_X > 4670) {
+		if(DISTANCE_X < 0 || DISTANCE_X >= 4670) {
 			return 0;	
 		}
 		else {
@@ -141,6 +141,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT) {	
+			checkOOB();
 			if (DISTANCE_X < 900 || DISTANCE_X > 4200) {
 				player.movePlayer(validMoveRight(DISTANCE_X),0);
 			}
@@ -150,7 +151,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				DISTANCE_X+=10;
 				
 			}
-			checkOOB();
+			
 		}
 		else if (key == KeyEvent.VK_LEFT) {
 			//player.updateVel(0, -5);
