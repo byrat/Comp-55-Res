@@ -33,6 +33,7 @@ public class SettingsMenu extends GraphicsPane {
 		this.program = app;
 		// BACkGOURND
 		SCREEN =  new GImage("media/MenuScreen/BACKGROUND.jpg", -250, 0);
+		SCREEN.setSize(MainApplication.WINDOW_WIDTH, MainApplication.WINDOW_HEIGHT);
 		// TItle
 		SETTINGS_TITLE  = new GImage("media/MenuScreen/SETTINGS_TITLE.png",500,175);
 		//Difficulty

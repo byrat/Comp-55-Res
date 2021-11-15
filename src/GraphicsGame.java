@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -6,6 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.Timer;
 
 import acm.graphics.GImage;
+import acm.graphics.GLine;
 import acm.graphics.GRect;
 
 public class GraphicsGame extends GraphicsPane implements KeyListener, ActionListener {
@@ -21,6 +23,15 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Player player;
 	Timer timer;
 	Weapon weapon;
+	Location loc;
+	public static final int MAP_WIDTH = 9174;//800;
+	public static final int MAP_HEIGHT = 3018;//600;
+	public static final int START_LOCATION_X = -400;//800;
+	public static final int START_LOCATION_Y = -1000;//600;
+	public int i = 0;
+	public boolean CAN_SCROLL = false;
+	public static int DISTANCE_X,DISTANCE_Y = 0;
+	public static int dx,dy;
 	
 	public void UpdateLog(int x) {
 		if (FruitLog[x] == false) {
@@ -36,10 +47,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	GraphicsGame(CollectionMenu collection, MainApplication  program){
 		this.program = program;
 		Background = new GImage("media/fruits/map.png" , 0 ,0);
+		Background.setSize((MAP_WIDTH),MAP_HEIGHT );
+		Background.setLocation(START_LOCATION_X,START_LOCATION_Y);
+		
+		
 		///this.CollectionMenu = collection;
-		player = new Player (program , 200 ,200 ,5 ,5);
+		player = new Player (program , 0 ,510 ,5 ,5);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
-		projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
+		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		
 	}
 	public boolean collision(GRect boxA, GRect boxB) {
@@ -80,28 +95,90 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.hide();
 
 	}
+	
+	private void checkOOB() {
+        if(DISTANCE_X < 0) {
+        	DISTANCE_X = 0;
+        }
+        if(DISTANCE_X > MAP_WIDTH) { 
+        	DISTANCE_X = MAP_WIDTH;
+        }
+        if(DISTANCE_Y < 0) { 
+        	DISTANCE_Y = 0;
+        }
+        if(DISTANCE_Y > MAP_HEIGHT) { 
+        	DISTANCE_Y = MAP_HEIGHT;
+        }
+    }
+	public double validMoveLeft(int x) {
+		if(DISTANCE_X <= 0 || DISTANCE_X > 5000) {
+			return 0;	
+		}
+		else {
+			DISTANCE_X-=10;
+		}
+		return -7;
+	}
+	public double validMoveRight(int x) {
+		if(DISTANCE_X < 0 || DISTANCE_X > 4670) {
+			return 0;	
+		}
+		else {
+			DISTANCE_X+=10;
+		}
+		return 7;
+		
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		player.update();
+		//loc = player.getLocation();
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_RIGHT) {
-			player.updateVel( 5, 0);
+		if(key == KeyEvent.VK_RIGHT) {	
+			if (DISTANCE_X < 900 || DISTANCE_X > 4200) {
+				player.movePlayer(validMoveRight(DISTANCE_X),0);
+			}
+			else {
+				player.movePlayer(1,0);
+				Background.setLocation(START_LOCATION_X + (i -= 10),START_LOCATION_Y);
+				DISTANCE_X+=10;
+				
+			}
+			checkOOB();
 		}
 		else if (key == KeyEvent.VK_LEFT) {
-			player.updateVel(-5,0);
+			//player.updateVel(0, -5);
+//			player.update();
+			checkOOB();
+			if (DISTANCE_X < 900 || DISTANCE_X > 4200) {
+				player.movePlayer(validMoveLeft(DISTANCE_X),0);
+			}
+			else {
+				player.movePlayer(-1,0);
+				Background.setLocation(START_LOCATION_X + (i += 10),START_LOCATION_Y);
+				DISTANCE_X-=10;
+				
+			}
+			
 		}
+	
 		if (key == KeyEvent.VK_SPACE) {
-			player.updateVel(0, 5);
+			player.updateVel(0, -5);
+			//if ()
 		}
 		// CAN ALWAYS CHANGE FROM 'D' to fire. 
 		if (key == KeyEvent.VK_D) {
-			projectile.
 		}
 	}
-
+	@Override
+	public void keyReleased(KeyEvent e) {
+		player.updateVel(0, 0);
+	}
 }
+

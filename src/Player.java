@@ -29,6 +29,9 @@ public class Player {
 	public Player (MainApplication app, int x, int y, int health, int ammo) {
 		program = app;
 		image = new GImage("media/characters/monkey.png", x , y);
+		image.setSize(100,100);
+		// EACH BLOCK IN MAP IS ABOUT 20 PX. -JT
+		//image.setLocation(0, 510);
 		location = new Location(x, y);
 		this.x = x;
 		this.y = y;
@@ -64,6 +67,9 @@ public class Player {
 	}
 	public void update() {
 		image.move(dx, dy);
+	}
+	public void movePlayer(double x, double y) {
+			image.move(x, y);
 	}
 	public void updateVel(double x, double y) {
 		if(dy != 0 && HasJumped == true) {
