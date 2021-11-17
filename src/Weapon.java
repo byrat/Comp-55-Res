@@ -34,6 +34,11 @@ public class Weapon{ //! Might have to extend Graphics Program
     	// CAN SWITCH MONKEY TO MONKEY WITH WEAPON SPRITE - JT
 		program.add(sprite);
 	}
+    public void update(double dx, int i) {
+		// TODO Auto-generated method stub
+		sprite.move(dx,i);
+		
+	}
 	public void hide() {
 		program.remove(sprite);
 	}

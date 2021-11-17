@@ -50,7 +50,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		}
 		
 	}
-	
+	public Player getPlayer() {
+		return player;
+	}
 	public boolean [] getLog() {
 		return FruitLog;
 	}

@@ -24,17 +24,24 @@ public class Enemy { // TODO Implement the other classes this one needs
     private GImage enemySprite;
     String IMG_PATH = "media/characters/";
     String IMG_PNG_SUFFIX = ".png";
+    MainApplication program;
+    GraphicsGame game;
+    double range = 40;
+    double dx;
+    double min;
+    double max;
+    double vision;
+    boolean shooting = false;
+    double cooldown;
 
     Difficulty difficulty;
     double difficultyWeight;
 
     String msg; //! Delete this later
 
-    public Enemy(double seconds, double firingRate, Difficulty difficulty, String msg, boolean isBoss) { //! Delete the String MSG Parameter
-        // firingRate = 1 * difficulty=0.75 ==> 0.75sec
+    public Enemy(MainApplication program, GraphicsGame game,double x, double y, boolean StartingDirection, Difficulty difficulty, boolean isBoss) { //! Delete the String MSG Parameter
+  
         this.firingRate = firingRate * difficulty.Difficulty();
- 
-        this.msg = msg; //! Delete this later
         
         if (isBoss == false) {
         	//?? I NEED TO ADD GETDIFFICULTY LATER ON - JT
@@ -48,30 +55,80 @@ public class Enemy { // TODO Implement the other classes this one needs
         } else {
             enemySprite = new GImage(IMG_PATH + "bossSprite" + IMG_PATH);
         }
+        enemySprite.setLocation(x, y);
+        if(StartingDirection) {
+        	dx = 1;
+        	max = x + range;
+        	min = x;
+        	
+        }
+        else {
+        	dx = -1;
+        	min  = x - range;
+        	max = x;
+        }
         
-        // Creates a timer for this specific enemy
-        // Overrides the run command so that each enemy can function independent of each other
-        // Since they function independent of each other, the enemies will not be synced up with one another
-        enemyTimer = new Timer(); 
-        enemyTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println(msg); //! Delete this, just a placeholder
-                // TODO Implement actions for enemy here
-                // TODO Actions include: UpdatePlayerLocation, ShootAtPlayer, etc.
-            }
-        }, 0, (int) Math.abs(seconds * 1000));
+        
+       
     }
 
     boolean isEnemyAlive() {
         // TODO implement logic: If Enemy == dead --> enemyTimer.cancel()
         return true; //! Change this later
     }
+    void show() {
+    	program.add(enemySprite);
+    	enemyWeapon.show();
+    }
+    void hide() {
+    	program.remove(enemySprite);
+    	enemyWeapon.hide();
+    }
+    public void update() {
+    	if(dx > 0) {
+    		double visonScore = game.getPlayer().getX() - enemySprite.getX();
+    		if(visonScore > 0 && visonScore < vision) {
+    			shooting = true;
+    			dx = 0;
+    		}
+    	}
+    	else {
+    		double visonScore = game.getPlayer().getX() - enemySprite.getX();
+			if(visonScore > 0 && visonScore < vision) {
+				shooting = true;
+				dx = 0;
+	}
+    	}
+    	enemySprite.move(dx, 0);
+    	enemyWeapon.update(dx,0);
+    }
+    {
+    if (shooting) {
+    	if(cooldown == 0) {
+    		shoot();
+    		cooldown = firingRate;
+    	}
+  
+    }
     
-    public static void main(String[] args) {
-        // Test Code
-        new Enemy(1, 1, Difficulty.IMPOSSIBLE, "Dam Eyman", false); //! Delete String Parameter
-        new Enemy(2.5, 1, Difficulty.EASY, "Wow Gene", false); //! Delete String Parameter
+  
    
     }
+    public void shoot() {
+    	double pX, pY, eX, eY;
+    	pX = game.getPlayer().getX() + (game.getPlayer().getWidth() / 2);
+    	pY = game.getPlayer().getY() + (game.getPlayer().getHeight() / 2);
+    	
+    	eX = enemySprite.getX() + (enemySprite.getWidth() / 2);
+    	eY = enemySprite.getY() + (enemySprite.getHeight() / 2);
+    	if(pX < eX) {
+    		float slope = (float) ((pX - eX) / (pY - eY));
+    	}
+    	else {
+    		float slope = (float) ((eX - pX) / (eY - pY));
+    	}
+    	///game.createProjectile(program);
+  
+    }
 }
+

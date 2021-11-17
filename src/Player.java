@@ -40,6 +40,18 @@ public class Player {
 		HasJumped = false;
 		
 	}
+	public double getX() {
+		return image.getX();
+	}
+	public double getY() {
+		return image.getY();
+	}
+	public double getHeight() {
+		return image.getHeight();
+	}
+	public double getWidth() {
+		return image.getWidth();
+	}
 		
 
 	
