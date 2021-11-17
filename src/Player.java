@@ -71,22 +71,11 @@ public class Player {
 	public void movePlayer(double x, double y) {
 			image.move(x, y);
 	}
-	public void updateVel(double x, double y) {
-		if(dy != 0 && HasJumped == true) {
-			dy = -5;
-		}
-		else if(dy != 0 && HasJumped == false) {
-			dy = 5;
-		}
-		else if (dy >= 30) {
-			HasJumped = true;
-		}
-		else if(dy == 0) {
-			HasJumped = false;
-			dy = y;
-		}
-		dx = x;
-		
+	public void updateVel(double x) {
+		this.dx = x;
+	}
+	public double getVel() {
+		return dx;
 	}
 	
 	public void show() {
