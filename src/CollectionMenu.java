@@ -31,6 +31,9 @@ public class CollectionMenu extends GraphicsPane {
 	private GImage COLLECT;
 	private GImage BACK;
 	
+	private GImage RETURN;
+	private GButton RETURN_BUTTON;
+	
 	private int OPTION;
 	
 	public CollectionMenu (MainApplication app) {
@@ -67,6 +70,10 @@ public class CollectionMenu extends GraphicsPane {
 		BACK.sendToBack();
 		BACK.setVisible(true);
 		
+		// RETURN BUTTON - JT
+		RETURN = new GImage("media/MenuScreen/RETURN.png",560 ,670);
+		RETURN_BUTTON = new GButton(" ",560 ,670,250,65);
+		RETURN_BUTTON.setVisible(false);
 	}
 
 	@Override
@@ -79,6 +86,8 @@ public class CollectionMenu extends GraphicsPane {
 		program.add(PINEAPPLE);
 		program.add(STRAWBERRY);
 		program.add(LOCKED);
+		program.add(RETURN);
+		program.add(RETURN_BUTTON);
 		log[0] = true;
 		
 		
@@ -95,6 +104,8 @@ public class CollectionMenu extends GraphicsPane {
 		program.remove(PINEAPPLE);
 		program.remove(STRAWBERRY);
 		program.remove(LOCKED);
+		program.remove(RETURN);
+		program.remove(RETURN_BUTTON);
 		
 		
 		
@@ -115,6 +126,9 @@ public class CollectionMenu extends GraphicsPane {
 //		}
 		if(obj == null) {
 			return;
+		}
+		if (obj == RETURN_BUTTON) {
+			program.switchToMenu();
 		}
 		if(CurrText == null) {
 			if(obj.equals(BANANA)) {
@@ -237,10 +251,9 @@ public class CollectionMenu extends GraphicsPane {
 				program.add(STRAWBERRY_D);
 				CurrText = STRAWBERRY_D;
 			}
+			
 		}
-		
-		
-		
+				
 	}
 	public void setOption(int option) {
 		this.OPTION = option;

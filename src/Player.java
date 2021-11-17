@@ -73,19 +73,19 @@ public class Player {
 	}
 	public void updateVel(double x, double y) {
 		if(dy != 0 && HasJumped == true) {
-			dy += -5;
+			dy = -5;
 		}
 		else if(dy != 0 && HasJumped == false) {
-			dy += 5;
+			dy = 5;
 		}
 		else if (dy >= 30) {
 			HasJumped = true;
 		}
 		else if(dy == 0) {
 			HasJumped = false;
-			dy += y;
+			dy = y;
 		}
-		dx += x;
+		dx = x;
 		
 	}
 	
