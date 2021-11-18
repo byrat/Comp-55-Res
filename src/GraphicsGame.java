@@ -18,6 +18,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	PINEAPPLE(""),*/
 	Collection CollectionMenu;
 	Player player;
+	Enemy enemy1;
 	Timer timer;
 	Weapon weapon;
 	Location loc;
@@ -54,6 +55,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public Player getPlayer() {
 		return player;
 	}
+	
 	public boolean [] getLog() {
 		return FruitLog;
 	}
@@ -107,7 +109,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player = new Player (program , 0 ,515 ,5 ,5);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
-		
+		enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
 	}
 	public boolean collision(GRect boxA, GRect boxB) {
 		double minX = boxA.getX();
@@ -176,7 +178,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		player.show();
 		weapon.show();
+		enemy1.show();
 		program.add(HITBOX);
+		
 		
 		///Start game loop
 		timer = new Timer (10 , this);

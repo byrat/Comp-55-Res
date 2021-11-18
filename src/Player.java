@@ -22,7 +22,10 @@ public class Player {
 	private MainApplication program;
 	
 	private GImage image;
-	// private GImage image2 = new GImage("media/MonkeyPics/banana.png");
+
+	public GImage getImage() {
+		return image;
+	}
 	
 	
 	

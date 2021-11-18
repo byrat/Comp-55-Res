@@ -27,6 +27,10 @@ public class MainApplication extends GraphicsProgram {
 		addMouseListeners();
 	}
 	
+	public GraphicsGame getGame() {
+		return game;
+	}
+	
 	/* switchToScreen(newGraphicsPane)
 	 * -------------------------------
 	 * will simply switch from making one pane that was currently
