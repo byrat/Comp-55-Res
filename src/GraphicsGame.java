@@ -22,6 +22,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Timer timer;
 	Weapon weapon;
 	Location loc;
+	Obstacle obstacle;
 	MainApplication program;
 	private Projectiles projectile;
 	
@@ -108,6 +109,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		///this.CollectionMenu = collection;
 		player = new Player (program , 0 ,515 ,5 ,5);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
+		obstacle = new Obstacle(program, 0, 0);
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
 	}
@@ -180,6 +182,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		weapon.show();
 		enemy1.show();
 		program.add(HITBOX);
+		obstacle.show();
 		
 		
 		///Start game loop
