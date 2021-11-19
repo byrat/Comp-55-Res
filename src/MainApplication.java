@@ -14,7 +14,7 @@ public class MainApplication extends GraphicsProgram {
 	private CollectionMenu collection;
 	private SettingsMenu settings;
 	private GraphicsGame game;
-	
+	private Enemy enemy;
 	/* Method: setupInteractions
 	 * -------------------------
 	 * must be called before switching to another
@@ -25,6 +25,10 @@ public class MainApplication extends GraphicsProgram {
 		requestFocus();
 		addKeyListeners();
 		addMouseListeners();
+	}
+	
+	public GraphicsGame getGame() {
+		return game;
 	}
 	
 	/* switchToScreen(newGraphicsPane)

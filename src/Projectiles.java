@@ -2,6 +2,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import acm.graphics.GImage;
+import acm.graphics.GObject;
+
 
 public class Projectiles {
 //	private Direction direction; 
@@ -37,6 +39,7 @@ public class Projectiles {
 		sprite = new GImage(IMG_PATH + spriteString + IMG_PATH_SUFFIX);
 		sprite.setLocation(start.getXAxis(), start.getYAxis());
 		sprite.scale(0.1);
+		
 		show();
 
 		projectileTimer = new Timer();
@@ -79,6 +82,13 @@ public class Projectiles {
 	}
 	
 	public boolean detectCollision() {
+//		double bulletX = sprite.getX();
+//		double bulletY = sprite.getY();
+////		if (getElementAt(bulletX, bulletY) instanceof Player) {
+////			
+////		}
+//		GObject test = app.getElementAt(null)
+		
 		return false;
 	}
 	

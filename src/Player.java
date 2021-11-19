@@ -22,7 +22,10 @@ public class Player {
 	private MainApplication program;
 	
 	private GImage image;
-	// private GImage image2 = new GImage("media/MonkeyPics/banana.png");
+
+	public GImage getImage() {
+		return image;
+	}
 	
 	
 	
@@ -39,6 +42,18 @@ public class Player {
 		this.ammo = ammo;
 		HasJumped = false;
 		
+	}
+	public double getX() {
+		return image.getX();
+	}
+	public double getY() {
+		return image.getY();
+	}
+	public double getHeight() {
+		return image.getHeight();
+	}
+	public double getWidth() {
+		return image.getWidth();
 	}
 		
 
