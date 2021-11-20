@@ -79,6 +79,10 @@ public class Enemy { // TODO Implement the other classes this one needs
         return true; //! Change this later
     }
     
+    public void moveEnemy(double x, double y) {
+		enemySprite.setLocation(x, y);
+}
+    
     public GImage getImage() {
     	return enemySprite;
     }

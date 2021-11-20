@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
 
@@ -22,23 +23,23 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Timer timer;
 	Weapon weapon;
 	Location loc;
-	Obstacle obstacle;
 	MainApplication program;
 	private Projectiles projectile;
 	
-	GImage Background;
+	private GImage Background, Background2;
 	private GRect FLOOR_1,FLOOR_2, FLOOR_2_1, FLOOR_3,FLOOR_4,FLOOR_4_1,FLOOR_4_2, FLOOR_5, FLOOR_6, FLOOR_7;
 	private GRect TOP_1,TOP_2,TOP_3, TOP_3_1, TOP_3_2, TOP_4, TOP_4_1, TOP_4_2, TOP_5, TOP_6, TOP_7;
-	private GRect WALL_1, WALL_2, WALL_3, WALL_4;
-	private GRect HITBOX;
+	private GRect WALL_1, WALL_2, WALL_3, WALL_4, WALL_5, WALL_6, WALL_7,WALL_8, WALL_9, WALL_10, WALL_11, WALL_12, WALL_13, WALL_14, WALL_15, WALL_16, WALL_17, WALL_18;
+	private GRect HITBOX , GOAL;
 	
 	public static final int MAP_WIDTH = 9174;//800;
 	public static final int MAP_HEIGHT = 3018;//600;
 	public static final int START_LOCATION_X = -400;//800;
 	public static final int START_LOCATION_Y = -1000;//600;
 	public int i,j,k,l,m,n,o,p,q,r,s= 0;
-	public int i2,j2,k2,l2,m2,n2,o2,p2,q2,r2,s2, t2 = 0;
-	public int i3,j3,k3,l3,m3,n3,o3,p3,q3,r3,s3 = 0;
+	public int i2,j2,k2,l2,m2,n2,o2,p2,q2,r2,s2, t2, u2, v2 = 0;
+	public int i3,j3,k3,l3,m3,n3,o3,p3,q3,r3,s3, t3, u3, v3, w3, x3, y3, z3 = 0;
+	public int e1, e2, e3 = 0;
 	public int MOVEMENT, S_MOVEMENT;
 	public int GRAVITY = 10;
 	public boolean CAN_SCROLL = false;
@@ -66,10 +67,16 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		Background.setSize((MAP_WIDTH),MAP_HEIGHT );
 		Background.setLocation(START_LOCATION_X,START_LOCATION_Y);
 		
+		Background2 = new GImage("media/fruits/map.png" , 4750 ,0);
+		Background2.setSize((MAP_WIDTH),MAP_HEIGHT );
+		Background2.setLocation(START_LOCATION_X,START_LOCATION_Y);
+		
 		FLOOR_1 = new GRect(0, 610, 375, 300);
 		FLOOR_2 = new GRect(375, 645, 1085, 300); //640 - 200 FOR ALL
 		FLOOR_2_1 = new GRect(1460, 645, 100, 300);
 		FLOOR_3 = new GRect(1560,580, 130,300);
+		FLOOR_3.setFilled(true);
+		FLOOR_3.setFillColor(Color.red);
 		FLOOR_4 = new GRect(1690,645, 385,300);
 		FLOOR_4_1 = new GRect(2075, 615, 130,300);
 		FLOOR_4_1.setFilled(true);
@@ -84,9 +91,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		TOP_3 = new GRect(1460,0, 100,400);
 		TOP_3_1 = new GRect(1560,0, 200,400);
 		TOP_3_2 = new GRect(1760,0, 100,400);
-		TOP_4 = new GRect(1860,0, 200,400);
+		TOP_4 = new GRect(1860,0, 100,400);
 		
-		TOP_4_1 = new GRect(2060,0,220,400);
+		TOP_4_1 = new GRect(1960,0,220,400);
 		TOP_4_1.setFilled(true);
 		TOP_4_1.setFillColor(Color.red);
 		TOP_4_2 = new GRect(2280,0,1310,400);
@@ -99,9 +106,75 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		WALL_2 = new GRect(465,625, 10,40);
 		WALL_3 = new GRect(1560,625, 10,40);
 		WALL_4 = new GRect(1680,625, 10,40);
+		WALL_4.setFilled(true);
+		WALL_4.setFillColor(Color.red);
+		WALL_5 = new GRect(1780,625, 10,40);
+		WALL_5.setFilled(true);
+		WALL_5.setFillColor(Color.GREEN);
+		WALL_6 = new GRect(1680,625, 10,40);
+		WALL_6.setFilled(true);
+		WALL_6.setFillColor(Color.cyan);
+		WALL_7 = new GRect(2060,625, 10,40);
+		WALL_7.setFilled(true);
+		WALL_7.setFillColor(Color.yellow);
+		WALL_8 = new GRect(2180,625, 10,40);
+		WALL_9 = new GRect(1880,625, 10,40);
+		WALL_10 = new GRect(1680,625, 10,40);
+		WALL_11 = new GRect(5000,625, 10,40);
+		WALL_12 = new GRect(5000,625, 10,40);
+		WALL_13 = new GRect(5000,625, 10,40);
+		WALL_14 = new GRect(5000,625, 10,40);
+		WALL_15 = new GRect(5000,625, 10,40);
+		WALL_16 = new GRect(5000,625, 10,40);
+		WALL_17 = new GRect(5000,625, 10,40);
+		WALL_18 = new GRect(5000,625, 10,40);
+		
+		FLOOR_1.setVisible(false);
+		FLOOR_2.setVisible(false);
+		FLOOR_2_1.setVisible(false);
+		FLOOR_3.setVisible(false);
+		FLOOR_4.setVisible(false);
+		FLOOR_4_1.setVisible(false);
+		FLOOR_4_2.setVisible(false);
+		FLOOR_5.setVisible(false);
+		FLOOR_6.setVisible(false);
+		FLOOR_7.setVisible(false);
+		TOP_1.setVisible(false);
+		TOP_2.setVisible(false);
+		TOP_3.setVisible(false);
+		TOP_3_1.setVisible(false);
+		TOP_3_2.setVisible(false);
+		TOP_4.setVisible(false);
+		
+		TOP_4_1.setVisible(false);
+		TOP_4_2.setVisible(false);
+		TOP_5.setVisible(false);
+		TOP_6.setVisible(false);
+		TOP_7.setVisible(false);
+		
+		WALL_1.setVisible(false);
+		WALL_2.setVisible(false);
+		WALL_3.setVisible(false);
+		WALL_4.setVisible(false);
+		WALL_5.setVisible(false);
+		WALL_6.setVisible(false);
+		WALL_7.setVisible(false);
+		WALL_8.setVisible(false);
+		WALL_9.setVisible(false);
+		WALL_10.setVisible(false);
+		WALL_11.setVisible(false);
+		WALL_12.setVisible(false);
+		WALL_13.setVisible(false);
+		WALL_14.setVisible(false);
+		WALL_15.setVisible(false);
+		WALL_16.setVisible(false);
+		WALL_17.setVisible(false);
+		WALL_18.setVisible(false);
+	
 		
 //		FLOOR_1.setVisible(false);
 		HITBOX = new GRect(0,510,100,100);
+		GOAL = new GRect(4200, 0, 100, 9000);
 	
 		
 		
@@ -109,7 +182,6 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		///this.CollectionMenu = collection;
 		player = new Player (program , 0 ,515 ,5 ,5);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
-		obstacle = new Obstacle(program, 0, 0);
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
 	}
@@ -150,6 +222,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public void showContents() {
 		// TODO Auto-generated method stub
 		program.add(Background);
+		program.add(Background2);
 		program.add(FLOOR_1);
 		program.add(FLOOR_2);
 		program.add(FLOOR_2_1);
@@ -177,12 +250,24 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		program.add(WALL_2);
 		program.add(WALL_3);
 		program.add(WALL_4);
+		program.add(WALL_5);
+		program.add(WALL_6);
+		program.add(WALL_7);
+		program.add(WALL_8);
+		program.add(WALL_9);
+		program.add(WALL_10);
+		program.add(WALL_11);
+		program.add(WALL_12);
+		program.add(WALL_13);
+		program.add(WALL_14);
+		program.add(WALL_15);
+		program.add(WALL_16);
 		
 		player.show();
 		weapon.show();
 		enemy1.show();
 		program.add(HITBOX);
-		obstacle.show();
+		program.add(GOAL);
 		
 		
 		///Start game loop
@@ -199,8 +284,54 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	@Override
 	public void hideContents() {
 		// TODO Auto-generated method stub
+		
+		program.remove(Background2);
 		program.remove(Background);
+		program.remove(FLOOR_1);
+		program.remove(FLOOR_2);
+		program.remove(FLOOR_2_1);
+		program.remove(FLOOR_3);
+		program.remove(FLOOR_4);
+		program.remove(FLOOR_4_1);
+		program.remove(FLOOR_4_2);
+		program.remove(FLOOR_5);
+		program.remove(FLOOR_6);
+		program.remove(FLOOR_7);
+		
+		program.remove(TOP_1);
+		program.remove(TOP_2);
+		program.remove(TOP_3);
+		program.remove(TOP_3_1);
+		program.remove(TOP_3_2);
+		program.remove(TOP_4);
+		program.remove(TOP_4_1);
+		program.remove(TOP_4_2);
+		program.remove(TOP_5);
+		program.remove(TOP_6);
+		program.remove(TOP_7);
+		
+		program.remove(WALL_1);
+		program.remove(WALL_2);
+		program.remove(WALL_3);
+		program.remove(WALL_4);
+		program.remove(WALL_5);
+		program.remove(WALL_6);
+		program.remove(WALL_7);
+		program.remove(WALL_8);
+		program.remove(WALL_9);
+		program.remove(WALL_10);
+		program.remove(WALL_11);
+		program.remove(WALL_12);
+		program.remove(WALL_13);
+		program.remove(WALL_14);
+		program.remove(WALL_15);
+		program.remove(WALL_16);
+		
 		player.hide();
+		weapon.hide();
+		enemy1.hide();
+		program.remove(HITBOX);
+		program.remove(GOAL);
 
 	}
 	
@@ -208,8 +339,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
         if(DISTANCE_X < 0) {
         	DISTANCE_X = 0;
         }
-        if(DISTANCE_X > 4650) { 
-        	DISTANCE_X = 4650;
+        if(DISTANCE_X > 4190) { 
+        	DISTANCE_X = 4190;
         }
         if(DISTANCE_Y < 0) { 
         	DISTANCE_Y = 0;
@@ -221,7 +352,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	//
 	
 	public double validMoveLeft(int x) {
-		if(DISTANCE_X <= 0 || DISTANCE_X > 4650) {
+		if(DISTANCE_X <= 0 || DISTANCE_X >= 4190) {
 			return 0;	
 		}
 		else {
@@ -230,7 +361,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		return -7;
 	}
 	public double validMoveRight(int x) {
-		if(DISTANCE_X < 0 || DISTANCE_X >= 4650) {
+		if(DISTANCE_X < 0 || DISTANCE_X >= 4180) {
 			return 0;
 		}
 		else {
@@ -247,6 +378,18 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		if(DISTANCE_X <= 370 || DISTANCE_X > 380) {
 			return 0;
 		}
+		if(DISTANCE_X <= 1860  || DISTANCE_X > 1865) {
+			return 0;
+		}
+		if(DISTANCE_X <= 2210  || DISTANCE_X > 2215) {
+			return 0;
+		}
+		if(DISTANCE_X <= 3510  || DISTANCE_X > 3515) {
+			return 0;
+		}
+		if(DISTANCE_X <= 3850  || DISTANCE_X > 3865) {
+			return 0;
+		}
 
 		DISTANCE_X-=5;
 		return -7;
@@ -254,6 +397,12 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	}
 	public double validWallMR(int x) {
 		if(DISTANCE_X <= 1660  || DISTANCE_X > 1675) {
+			return 0;
+		}
+		if(DISTANCE_X <= 2060  || DISTANCE_X > 2065) {
+			return 0;
+		}
+		if(DISTANCE_X <= 3840  || DISTANCE_X > 3845) {
 			return 0;
 		}
 		DISTANCE_X+=5;
@@ -267,44 +416,6 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		//player.update();
 		//loc = player.getLocation();
 		GRAVITY = 10;
-//		player.movePlayer(0, GRAVITY);
-//		HITBOX.move(0,GRAVITY);
-//		if(collision(HITBOX, FLOOR_1) == true) {
-//			player.movePlayer(0, -GRAVITY);
-//			HITBOX.move(0,-GRAVITY);
-//			if(collision(HITBOX, TOP_2) == true ) {
-//				player.movePlayer(0, GRAVITY);
-//				HITBOX.move(0,GRAVITY);
-//				if(collision(HITBOX, FLOOR_2) == true){
-//					player.movePlayer(0, -GRAVITY);
-//					HITBOX.move(0,-GRAVITY);
-//					if(collision(HITBOX, TOP_5) == true){
-//						player.movePlayer(0, GRAVITY);
-//						HITBOX.move(0,GRAVITY);
-//						if(collision(HITBOX, FLOOR_5) == true){
-//							player.movePlayer(0, -GRAVITY);
-//							HITBOX.move(0,-GRAVITY); 
-//							if(collision(HITBOX, TOP_6) == true){
-//								player.movePlayer(0, GRAVITY);
-//								HITBOX.move(0,GRAVITY);
-//								if(collision(HITBOX, FLOOR_6) == true){
-//									player.movePlayer(0, -GRAVITY);
-//									HITBOX.move(0,-GRAVITY);
-//									if(collision(HITBOX, TOP_7) == true){
-//										player.movePlayer(0, GRAVITY);
-//										HITBOX.move(0,GRAVITY);
-//										if(collision(HITBOX, FLOOR_7) == true){
-//											player.movePlayer(0,-GRAVITY);
-//											HITBOX.move(0,-GRAVITY);
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
 		player.movePlayer(0, GRAVITY);
 		HITBOX.move(0,GRAVITY);
 		if(collision(HITBOX, FLOOR_1) == true) {
@@ -357,6 +468,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 							if(collision(HITBOX, TOP_4_1) == true) {
 								player.movePlayer(0, GRAVITY);
 								HITBOX.move(0, GRAVITY);
+								if(collision(HITBOX, FLOOR_4) == true) {
+									player.movePlayer(0, -GRAVITY);
+									HITBOX.move(0, -GRAVITY);
+									if(collision(HITBOX, TOP_5) == true) {
+										player.movePlayer(0, GRAVITY);
+										HITBOX.move(0, GRAVITY);
+									}
+								}
 							}
 						}
 					}
@@ -409,44 +528,57 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		if(key == KeyEvent.VK_RIGHT) {	
 			checkOOB();
 			checkWall();
-			if (DISTANCE_X < 900 || DISTANCE_X > 4200) {
-			
+			if (DISTANCE_X < 900 || DISTANCE_X > 4190) {
+				
 				player.movePlayer(validMoveRight(DISTANCE_X),0);
 				player.updateVel(7);
 				HITBOX.move(validMoveRight(DISTANCE_X),0);
+				//System.out.println("OKAY");
 			} 
-			
 			// MOVEMENT RIGHT
 			else {
+				
 				if(collision(HITBOX, WALL_3) == true && collision(HITBOX, WALL_4) != true) {
-					TEMP_D = DISTANCE_X;
 					player.movePlayer(validWallMR(DISTANCE_X),0);
 					HITBOX.move(validWallMR(DISTANCE_X), 0);
 					player.updateVel(0);
-//					System.out.println("reached ");
-//					System.out.println(DISTANCE_X);
-//					System.out.println(validWallMR(TEMP_D));
-//					System.out.println(validWallMR(DISTANCE_X));
-			
+					//System.out.println("HERE ---11");
 				}
+				else if(collision(HITBOX, WALL_7) == true && collision(HITBOX, WALL_8) != true) {
+					player.movePlayer(validWallMR(DISTANCE_X),0);
+					HITBOX.move(validWallMR(DISTANCE_X), 0);
+					player.updateVel(0);
+					//System.out.println("HERE --1");
+				}
+				else if(collision(HITBOX, WALL_15) == true && collision(HITBOX, WALL_16) != true) {
+					player.movePlayer(validWallMR(DISTANCE_X),0);
+					HITBOX.move(validWallMR(DISTANCE_X), 0);
+					player.updateVel(0);
+					//System.out.println("HERE 1");
+				}
+				else if(collision(HITBOX, GOAL) == true) {
+					hideContents();
+				}
+				
+				
 				else {
+				
+					//System.out.println("OVER HERE 1");
 					player.movePlayer(1,0);
 					player.updateVel(7);
 					HITBOX.move(1,0);
-					//
-					
-					
-					
+					//				
 					Background.setLocation(START_LOCATION_X + (i -= 10),START_LOCATION_Y);
+					Background2.setLocation((v2 -= 10)+ 4400,START_LOCATION_Y);
 					FLOOR_1.setLocation(0 + (j -= 10),610);
 					FLOOR_2.setLocation(375 + (k -= 10),645);
 					FLOOR_2_1.setLocation(1460 + (q -= 10),645);
-					FLOOR_3.setLocation(1560 + (l -= 10),575);
+					FLOOR_3.setLocation(1560 + (l -= 10),585);
 					FLOOR_4.setLocation(1690 + (m -= 10),645);
-					FLOOR_4_1.setLocation(2075 + (r -= 10), 610);
+					FLOOR_4_1.setLocation(2075 + (r -= 10), 615);
 					FLOOR_4_2.setLocation(2205 + (s -= 10), 645);
 					FLOOR_5.setLocation(3510 + (n -= 10),675);
-					FLOOR_6.setLocation(3860 + (o -= 10),710);
+					FLOOR_6.setLocation(3860 + (o -= 10),715);
 					FLOOR_7.setLocation(4185 + (p -= 10),675);
 					
 					TOP_1.setLocation((j2 -= 10),0);
@@ -455,17 +587,33 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 					TOP_3_1.setLocation(1560 + (q2 -= 10),0);
 					TOP_3_2.setLocation(1760 + (r2 -= 10),0);
 					TOP_4.setLocation(1860 + (m2 -= 10),0);
-					TOP_4_1.setLocation(2060 + (s2 -= 10),0);
+					TOP_4_1.setLocation(1960 + (s2 -= 10),0);
 					TOP_4_2.setLocation(2280+ ( t2 -= 10), 0);
 					TOP_5.setLocation(3590 + (n2 -= 10),0);
 					TOP_6.setLocation(3940 + (o2 -= 10), 0);
 					TOP_7.setLocation(4185 + (p2 -= 10),0);
+					
+					GOAL.setLocation(4740 + (u2 -= 10),0);
 					
 					
 					WALL_1.setLocation(365 + (j3 -= 10), 610);
 					WALL_2.setLocation(465 + (k3 -= 10), 610);
 					WALL_3.setLocation(1560 + (l3 -= 10), 610);
 					WALL_4.setLocation(1680 + (m3 -= 10), 610);
+					WALL_5.setLocation(1680 + (n3 -= 10), 610);
+					WALL_6.setLocation(1780 + (o3 -= 10), 610);
+					WALL_7.setLocation(2065 + (p3 -= 10), 615);
+					WALL_8.setLocation(2165 + (q3 -= 10), 615);
+					WALL_9.setLocation(2205 + (r3 -= 10), 615);
+					WALL_10.setLocation(2305 + (s3 -= 10), 615);
+					WALL_11.setLocation(3500 + (t3 -= 10), 645);
+					WALL_12.setLocation(3600 + (u3 -= 10), 645);
+					WALL_13.setLocation(3850 + (w3 -= 10), 675);
+					WALL_14.setLocation(3950 + (x3 -= 10), 675);
+					WALL_15.setLocation(4185 + (y3 -= 10), 675);
+					WALL_16.setLocation(4285 + (z3 -= 10), 675);
+					
+					enemy1.moveEnemy(300 + (e1 -= 10), 515);
 					
 					
 					DISTANCE_X+=10;
@@ -478,17 +626,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 			//player.updateVel(0, -5);
 //			player.update();
 			checkOOB();
-			if (DISTANCE_X < 900 || DISTANCE_X > 4200) {
-//				player.movePlayer(validMoveLeft(DISTANCE_X),0);
-//				player.updateVel(5,-5);
-//				HITBOX.move(validMoveLeft(DISTANCE_X),0);
-				//
+			checkWall();
+			if (DISTANCE_X < 900 || DISTANCE_X > 4190) {
 				if(collision(HITBOX, WALL_1) == true & collision(HITBOX, WALL_2) != true) {
 					player.movePlayer(validWallML(DISTANCE_X),0);
 					HITBOX.move(validWallML(DISTANCE_X), 0);
 					player.updateVel(0);
-					
 				}
+				
 				else {// if(collision(HITBOX, WALL_2) == true){
 					player.movePlayer(validMoveLeft(DISTANCE_X),0);
 					player.updateVel(-7);
@@ -497,45 +642,86 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				}
 			}
 			else {
-				player.movePlayer(-1,0);
-				player.updateVel(-7);
-				HITBOX.move(-1,0);
-				
-				Background.setLocation(START_LOCATION_X + (i += 10),START_LOCATION_Y);
-				FLOOR_1.setLocation(0 + (j += 10),610);
-				FLOOR_2.setLocation(375 + (k += 10),645);
-				FLOOR_2_1.setLocation(1460 + (q += 10),645);
-				FLOOR_3.setLocation(1560 + (l += 10),575);
-				FLOOR_4.setLocation(1690 + (m += 10),645);
-				FLOOR_4_1.setLocation(2075 + (r += 10), 610);
-				FLOOR_4_2.setLocation(2205 + (s += 10), 645);
-				FLOOR_5.setLocation(3510 + (n += 10),675);
-				FLOOR_6.setLocation(3860 + (o += 10),710);
-				FLOOR_7.setLocation(4185 + (p += 10),675);
-				
-				TOP_1.setLocation((j2 += 10),0);
-				TOP_2.setLocation(455 + (k2 += 10),0);
-				TOP_3.setLocation(1460 + (l2 += 10),0);
-				TOP_3_1.setLocation(1560 + (q2 += 10),0);
-				TOP_3_2.setLocation(1760 + (r2 += 10),0);
-				TOP_4.setLocation(1860 + (m2 += 10),0);
-				TOP_4_1.setLocation(2060 + (s2 += 10),0);
-				TOP_4_2.setLocation(2280+ ( t2 += 10), 0);
-				TOP_5.setLocation(3590 + (n2 += 10),0);
-				TOP_6.setLocation(3940 + (o2 += 10), 0);
-				TOP_7.setLocation(4185 + (p2 += 10),0);
-				
-				
-				WALL_1.setLocation(365 + (j3 += 10), 610);
-				WALL_2.setLocation(465 + (k3 += 10), 610);
-				WALL_3.setLocation(1560 + (l3 += 10), 610);
-				WALL_4.setLocation(1680 + (m3 += 10), 610);
+				if(collision(HITBOX, WALL_4) == true & collision(HITBOX, WALL_6) != true) {
+					player.movePlayer(validWallML(DISTANCE_X),0);
+					HITBOX.move(validWallML(DISTANCE_X), 0);
+					player.updateVel(0);	
+				}
+				else if(collision(HITBOX, WALL_9) == true & collision(HITBOX, WALL_10) != true) {
+					player.movePlayer(validWallML(DISTANCE_X),0);
+					HITBOX.move(validWallML(DISTANCE_X), 0);
+					player.updateVel(0);
+				}
+				else if(collision(HITBOX, WALL_11) == true & collision(HITBOX, WALL_12) != true) {
+					player.movePlayer(validWallML(DISTANCE_X),0);
+					HITBOX.move(validWallML(DISTANCE_X), 0);
+					player.updateVel(0);
+				}
+				else if(collision(HITBOX, WALL_13) == true & collision(HITBOX, WALL_14) != true) {
+					player.movePlayer(validWallML(DISTANCE_X),0);
+					HITBOX.move(validWallML(DISTANCE_X), 0);
+					player.updateVel(0);
+				}
+//				else if(collision(HITBOX, WALL_15) == true & collision(HITBOX, WALL_16) != true) {
+//					player.movePlayer(validWallML(DISTANCE_X),0);
+//					HITBOX.move(validWallML(DISTANCE_X), 0);
+//					player.updateVel(0);
+//				}
+				else {
+					player.movePlayer(-1,0);
+					player.updateVel(-7);
+					HITBOX.move(-1,0);
+					
+					Background.setLocation(START_LOCATION_X + (i += 10),START_LOCATION_Y);
+					Background2.setLocation((v2 += 10)+ 4400,START_LOCATION_Y);
+					
+					FLOOR_1.setLocation(0 + (j += 10),610);
+					FLOOR_2.setLocation(375 + (k += 10),645);
+					FLOOR_2_1.setLocation(1460 + (q += 10),645);
+					FLOOR_3.setLocation(1560 + (l += 10),585);
+					FLOOR_4.setLocation(1690 + (m += 10),645);
+					FLOOR_4_1.setLocation(2075 + (r += 10), 615);
+					FLOOR_4_2.setLocation(2205 + (s += 10), 645);
+					FLOOR_5.setLocation(3510 + (n += 10),675);
+					FLOOR_6.setLocation(3860 + (o += 10),715);
+					FLOOR_7.setLocation(4185 + (p += 10),675);
+					
+					TOP_1.setLocation((j2 += 10),0);
+					TOP_2.setLocation(455 + (k2 += 10),0);
+					TOP_3.setLocation(1460 + (l2 += 10),0);
+					TOP_3_1.setLocation(1560 + (q2 += 10),0);
+					TOP_3_2.setLocation(1760 + (r2 += 10),0);
+					TOP_4.setLocation(1860 + (m2 += 10),0);
+					TOP_4_1.setLocation(1960 + (s2 += 10),0);
+					TOP_4_2.setLocation(2280+ ( t2 += 10), 0);
+					TOP_5.setLocation(3590 + (n2 += 10),0);
+					TOP_6.setLocation(3940 + (o2 += 10), 0);
+					TOP_7.setLocation(4185 + (p2 += 10),0);
+					
+					GOAL.setLocation(4740 + (u2 += 10),0);
+					
+					
+					WALL_1.setLocation(365 + (j3 += 10), 610);
+					WALL_2.setLocation(465 + (k3 += 10), 610);
+					WALL_3.setLocation(1560 + (l3 += 10), 610);
+					WALL_4.setLocation(1680 + (m3 += 10), 610);
+					WALL_5.setLocation(1680 + (n3 += 10), 610);
+					WALL_6.setLocation(1780 + (o3 += 10), 610);
+					WALL_7.setLocation(2065 + (p3 += 10), 615);
+					WALL_8.setLocation(2165 + (q3 += 10), 615);
+					WALL_9.setLocation(2205 + (r3 += 10), 615);
+					WALL_10.setLocation(2305 + (s3 += 10), 615);
+					WALL_11.setLocation(3500 + (t3 += 10), 645);
+					WALL_12.setLocation(3600 + (u3 += 10), 645);
+					WALL_13.setLocation(3850 + (w3 += 10), 675);
+					WALL_14.setLocation(3950 + (x3 += 10), 675);
+					WALL_15.setLocation(4185 + (y3 += 10), 675);
+					WALL_16.setLocation(4285 + (z3 += 10), 675);
+					
+					DISTANCE_X-=10;
 
-				
-				DISTANCE_X-=10;
-				
+				}
 			}
-			
 		}
 	
 		if (key == KeyEvent.VK_SPACE) {
