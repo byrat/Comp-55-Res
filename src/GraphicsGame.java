@@ -518,7 +518,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 			player.movePlayer(0, -GRAVITY);
 			HITBOX.move(0, -GRAVITY);
 		}
-		System.out.println(DISTANCE_X);
+//		System.out.println(DISTANCE_X);
 	}
 		
 	

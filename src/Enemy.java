@@ -17,6 +17,7 @@ import java.util.TimerTask;
 
 public class Enemy { // TODO Implement the other classes this one needs
 	MainApplication app;
+	Player player;
 	private Timer enemyTimer;
     private Location lastKnownLocation;
 
@@ -66,10 +67,16 @@ public class Enemy { // TODO Implement the other classes this one needs
             @Override
             public void run() {
             	if (app.getGame() != null) {
+            		player =  app.getGame().getPlayer();
             		GImage playerSprite = app.getGame().getPlayer().getImage();
                     Location playerLocation = new Location((int) playerSprite.getLocation().getX(), (int) playerSprite.getLocation().getY());
                     Projectiles fireAtPlayer = new Projectiles(app, enemyLocation, playerLocation, 0, "bullet");
             	}
+            	if (player.getHealth() == 0) {
+                	System.out.println("Player is dead");
+                	player.hide();
+                	enemyTimer.cancel();
+                }
             }
         }, 0, (int) Math.abs(seconds * 1000));
     }

@@ -19,9 +19,11 @@ public class Projectiles {
 	private boolean isCollided;
 	
 	private Location positon, start, target;
+
 	private double slopeNum, slopeDen, slope;
 
 	MainApplication app;
+	Player player;
 	Timer projectileTimer;
 	private double seconds = 0.1;
 	private int updateTime = (int) Math.abs(seconds * 1000);
@@ -47,9 +49,16 @@ public class Projectiles {
 			@Override
 			public void run() {
 				sprite.move(slopeDen * seconds, slopeNum * seconds);
-				if (sprite.getLocation().getX() < 0 || sprite.getLocation().getY() < 0 || detectCollision() == true) {
+				player = app.getGame().getPlayer();
+				if (sprite.getLocation().getX() < 0 || sprite.getLocation().getY() < 0) {
 					projectileTimer.cancel();
 					hide();
+					System.out.println("Projectile Flew Out of Bounds");
+				} else if (detectCollision() == true) {
+					System.out.println("Detected Collision");
+					projectileTimer.cancel();
+					hide();
+					player.decrementHeatlh();
 				}
 			}
 		}, 0, updateTime); 
@@ -82,12 +91,21 @@ public class Projectiles {
 	}
 	
 	public boolean detectCollision() {
-//		double bulletX = sprite.getX();
-//		double bulletY = sprite.getY();
-////		if (getElementAt(bulletX, bulletY) instanceof Player) {
-////			
-////		}
-//		GObject test = app.getElementAt(null)
+		double spriteLeftSideX= Math.floor(sprite.getLocation().getX() - 1);
+		double spriteRightSideX = Math.floor((sprite.getLocation().getX() + sprite.getWidth()) + 1);
+		
+		double spriteTopCornerY = Math.floor(sprite.getLocation().getY());
+		double spriteMiddleY = Math.floor(sprite.getLocation().getY() + (sprite.getHeight() / 2));
+		double spriteBottomCornerY = Math.floor(sprite.getLocation().getY() + sprite.getHeight());
+		
+		if (player.getImage().contains(spriteLeftSideX, spriteTopCornerY) ||
+				player.getImage().contains(spriteLeftSideX, spriteMiddleY) || 
+				player.getImage().contains(spriteLeftSideX, spriteBottomCornerY) ||
+				player.getImage().contains(spriteRightSideX, spriteTopCornerY) ||
+				player.getImage().contains(spriteRightSideX, spriteMiddleY) ||
+				player.getImage().contains(spriteRightSideX, spriteBottomCornerY))  {
+			return true;
+		}
 		
 		return false;
 	}

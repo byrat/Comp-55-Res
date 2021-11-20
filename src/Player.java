@@ -63,6 +63,10 @@ public class Player {
 		this.health = hp;
 	}
 	
+	public int getHealth() { return health; }
+	
+	public void decrementHeatlh() { health--; }
+	
 	public void setAmmo (int ammo) {
 		this.ammo = ammo;
 	}
