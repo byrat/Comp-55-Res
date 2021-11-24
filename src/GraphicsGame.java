@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
@@ -10,6 +12,7 @@ import javax.swing.Timer;
 import acm.graphics.GImage;
 import acm.graphics.GLine;
 import acm.graphics.GRect;
+import acm.graphics.GRectangle;
 
 public class GraphicsGame extends GraphicsPane implements KeyListener, ActionListener {
 	boolean [] FruitLog = new boolean[4];
@@ -46,6 +49,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public static int DISTANCE_X,DISTANCE_Y = 0;
 	public static int TEMP_D;
 	public static int dx,dy;
+	ArrayList<GRect> bounds;
 	
 	public void UpdateLog(int x) {
 		if (FruitLog[x] == false) {
@@ -62,6 +66,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		return FruitLog;
 	}
 	GraphicsGame(CollectionMenu collection, MainApplication  program){
+		bounds = new ArrayList<GRect>();
+		
 		this.program = program;
 		Background = new GImage("media/fruits/map.png" , 0 ,0);
 		Background.setSize((MAP_WIDTH),MAP_HEIGHT );
@@ -72,17 +78,36 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		Background2.setLocation(START_LOCATION_X,START_LOCATION_Y);
 		
 		FLOOR_1 = new GRect(0, 610, 375, 300);
-		FLOOR_2 = new GRect(375, 645, 1085, 300); //640 - 200 FOR ALL
+		FLOOR_1.setFilled(true);
+		FLOOR_1.setFillColor(Color.blue);
+		
+		FLOOR_2 = new GRect(375, 643, 1380, 300); //640 - 200 FOR ALL
+		FLOOR_2.setFilled(true);
+		FLOOR_2.setFillColor(Color.red);
+		
 		FLOOR_2_1 = new GRect(1460, 645, 100, 300);
+		
+		
 		FLOOR_3 = new GRect(1560,580, 130,300);
 		FLOOR_3.setFilled(true);
-		FLOOR_3.setFillColor(Color.red);
+		FLOOR_3.setFillColor(Color.black);
+		
 		FLOOR_4 = new GRect(1690,645, 385,300);
+		FLOOR_4.setFilled(true);
+		FLOOR_4.setFillColor(Color.yellow);
+		
 		FLOOR_4_1 = new GRect(2075, 615, 130,300);
 		FLOOR_4_1.setFilled(true);
 		FLOOR_4_1.setFillColor(Color.red);
+		
 		FLOOR_4_2 = new GRect(2205, 645, 1305,300);
+		FLOOR_4_2.setFilled(true);
+		FLOOR_4_2.setFillColor(Color.white);
+		
 		FLOOR_5 = new GRect(3510, 675, 350,300);
+		FLOOR_5.setFilled(true);
+		FLOOR_5.setFillColor(Color.orange);
+		
 		FLOOR_6 = new GRect(3860,705, 325,300);
 		FLOOR_7 = new GRect(4110,672, 490,300);
 		
@@ -129,38 +154,38 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		WALL_17 = new GRect(5000,625, 10,40);
 		WALL_18 = new GRect(5000,625, 10,40);
 		
-		FLOOR_1.setVisible(false);
-		FLOOR_2.setVisible(false);
-		FLOOR_2_1.setVisible(false);
-		FLOOR_3.setVisible(false);
-		FLOOR_4.setVisible(false);
-		FLOOR_4_1.setVisible(false);
-		FLOOR_4_2.setVisible(false);
-		FLOOR_5.setVisible(false);
-		FLOOR_6.setVisible(false);
-		FLOOR_7.setVisible(false);
-		TOP_1.setVisible(false);
-		TOP_2.setVisible(false);
-		TOP_3.setVisible(false);
-		TOP_3_1.setVisible(false);
-		TOP_3_2.setVisible(false);
-		TOP_4.setVisible(false);
+		FLOOR_1.setVisible(true);
+		FLOOR_2.setVisible(true);
+		FLOOR_2_1.setVisible(true);
+		FLOOR_3.setVisible(true);
+		FLOOR_4.setVisible(true);
+		FLOOR_4_1.setVisible(true);
+		FLOOR_4_2.setVisible(true);
+		FLOOR_5.setVisible(true);
+		FLOOR_6.setVisible(true);
+		FLOOR_7.setVisible(true);
+		TOP_1.setVisible(true);
+		TOP_2.setVisible(true);
+		TOP_3.setVisible(true);
+		TOP_3_1.setVisible(true);
+		TOP_3_2.setVisible(true);
+		TOP_4.setVisible(true);
 		
-		TOP_4_1.setVisible(false);
-		TOP_4_2.setVisible(false);
-		TOP_5.setVisible(false);
-		TOP_6.setVisible(false);
-		TOP_7.setVisible(false);
+		TOP_4_1.setVisible(true);
+		TOP_4_2.setVisible(true);
+		TOP_5.setVisible(true);
+		TOP_6.setVisible(true);
+		TOP_7.setVisible(true);
 		
-		WALL_1.setVisible(false);
-		WALL_2.setVisible(false);
-		WALL_3.setVisible(false);
-		WALL_4.setVisible(false);
-		WALL_5.setVisible(false);
-		WALL_6.setVisible(false);
-		WALL_7.setVisible(false);
-		WALL_8.setVisible(false);
-		WALL_9.setVisible(false);
+		WALL_1.setVisible(true);
+		WALL_2.setVisible(true);
+		WALL_3.setVisible(true);
+		WALL_4.setVisible(true);
+		WALL_5.setVisible(true);
+		WALL_6.setVisible(true);
+		WALL_7.setVisible(true);
+		WALL_8.setVisible(true);
+		WALL_9.setVisible(true);
 		WALL_10.setVisible(false);
 		WALL_11.setVisible(false);
 		WALL_12.setVisible(false);
@@ -170,6 +195,18 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		WALL_16.setVisible(false);
 		WALL_17.setVisible(false);
 		WALL_18.setVisible(false);
+		
+		//bounds.add(FLOOR_1);
+		bounds.add(FLOOR_2);
+		bounds.add(FLOOR_2_1);
+		/*bounds.add(FLOOR_3);
+		bounds.add(FLOOR_4);
+		bounds.add(FLOOR_4_1);
+		bounds.add(FLOOR_4_2);
+		bounds.add(FLOOR_6);
+		bounds.add(FLOOR_7);*/
+		
+		
 	
 		
 //		FLOOR_1.setVisible(false);
@@ -180,10 +217,26 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		
 		///this.CollectionMenu = collection;
-		player = new Player (program , 0 ,515 ,5 ,5);
+		player = new Player (program , 350 ,515 ,5 ,5);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
-		enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
+		///enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
+	}
+	public boolean collision(GRectangle boxA, GRectangle boxB) {
+		double minX = boxA.getX();
+		double minY = boxA.getY();
+		double maxX = minX + boxA.getWidth();
+		double maxY = minY + boxA.getHeight();
+		
+		double minXB = boxB.getX();
+		double minYB = boxB.getY();
+		double maxXB = minX + boxB.getWidth();
+		double maxYB = minY + boxB.getHeight();
+		// IF BOX B IS LARGER THEN FRST BOX.
+		if(minXB > maxX || minX > maxXB) return false;
+		if(minYB > maxY || minY > maxYB) return false;
+		
+		return true;
 	}
 	public boolean collision(GRect boxA, GRect boxB) {
 		double minX = boxA.getX();
@@ -265,7 +318,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		player.show();
 		weapon.show();
-		enemy1.show();
+		///enemy1.show();
 		program.add(HITBOX);
 		program.add(GOAL);
 		
@@ -329,7 +382,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		player.hide();
 		weapon.hide();
-		enemy1.hide();
+		///enemy1.hide();
 		program.remove(HITBOX);
 		program.remove(GOAL);
 
@@ -415,27 +468,45 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		// TODO Auto-generated method stub
 		//player.update();
 		//loc = player.getLocation();
-		GRAVITY = 10;
-		player.movePlayer(0, GRAVITY);
-		HITBOX.move(0,GRAVITY);
+		player.updateYVel(2);
+		getBounds();
+		player.update();
+		return;
+		/*GRAVITY = 2;
+		player.movePlayer(0, player.getYVel());
+		HITBOX.move(0,player.getYVel());
+		player.updateYVel(player.getYVel() + GRAVITY);
 		if(collision(HITBOX, FLOOR_1) == true) {
+			
 			player.movePlayer(0, -GRAVITY);
 			HITBOX.move(0,-GRAVITY);
+			player.updateYVel(0);
+			player.setHasJumped(false);
+			DISTANCE_Y -= 70;
+			
 			if(collision(HITBOX, TOP_2) == true) {
 				player.movePlayer(0, GRAVITY);
 				HITBOX.move(0,GRAVITY);
+				player.updateYVel(0);
+				player.setHasJumped(false);
+				
 				if(collision(HITBOX, FLOOR_2) == true) {
 					player.movePlayer(0, -GRAVITY);
 					HITBOX.move(0, -GRAVITY);
+					player.updateYVel(0);
+					
 					if(collision(HITBOX, TOP_3) == true) {
 						player.movePlayer(0, GRAVITY);
 						HITBOX.move(0,GRAVITY);
+						
 						if(collision(HITBOX, FLOOR_2) == true ) {
 							player.movePlayer(0, -GRAVITY);
 							HITBOX.move(0,-GRAVITY);
+							
 							if(collision(HITBOX, TOP_3) == true) {
 								player.movePlayer(0, GRAVITY);
 								HITBOX.move(0,GRAVITY);
+								
 								if(collision(HITBOX, FLOOR_2_1) == true) {
 									player.movePlayer(0, -GRAVITY);
 									HITBOX.move(0,-GRAVITY);
@@ -459,7 +530,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				if(collision(HITBOX, FLOOR_4) == true) {
 					player.movePlayer(0, -GRAVITY);
 					HITBOX.move(0, -GRAVITY);
-					if(collision(HITBOX, TOP_4) == true) {
+					if(collision(HITBOX, TOP_4)) {
 						player.movePlayer(0, GRAVITY);
 						HITBOX.move(0, GRAVITY);
 						if(collision(HITBOX, FLOOR_4) == true) {
@@ -518,7 +589,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 			player.movePlayer(0, -GRAVITY);
 			HITBOX.move(0, -GRAVITY);
 		}
-//		System.out.println(DISTANCE_X);
+//		System.out.println(DISTANCE_X);*/
 	}
 		
 	
@@ -526,12 +597,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT) {	
+			player.updateXVel(2);
+			/*
 			checkOOB();
 			checkWall();
 			if (DISTANCE_X < 900 || DISTANCE_X > 4190) {
 				
 				player.movePlayer(validMoveRight(DISTANCE_X),0);
-				player.updateVel(7);
+				player.updateXVel(7);
 				HITBOX.move(validMoveRight(DISTANCE_X),0);
 				//System.out.println("OKAY");
 			} 
@@ -541,19 +614,19 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				if(collision(HITBOX, WALL_3) == true && collision(HITBOX, WALL_4) != true) {
 					player.movePlayer(validWallMR(DISTANCE_X),0);
 					HITBOX.move(validWallMR(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 					//System.out.println("HERE ---11");
 				}
 				else if(collision(HITBOX, WALL_7) == true && collision(HITBOX, WALL_8) != true) {
 					player.movePlayer(validWallMR(DISTANCE_X),0);
 					HITBOX.move(validWallMR(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 					//System.out.println("HERE --1");
 				}
 				else if(collision(HITBOX, WALL_15) == true && collision(HITBOX, WALL_16) != true) {
 					player.movePlayer(validWallMR(DISTANCE_X),0);
 					HITBOX.move(validWallMR(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 					//System.out.println("HERE 1");
 				}
 				else if(collision(HITBOX, GOAL) == true) {
@@ -565,7 +638,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				
 					//System.out.println("OVER HERE 1");
 					player.movePlayer(1,0);
-					player.updateVel(7);
+					player.updateXVel(7);
 					HITBOX.move(1,0);
 					//				
 					Background.setLocation(START_LOCATION_X + (i -= 10),START_LOCATION_Y);
@@ -613,30 +686,33 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 					WALL_15.setLocation(4185 + (y3 -= 10), 675);
 					WALL_16.setLocation(4285 + (z3 -= 10), 675);
 					
-					enemy1.moveEnemy(300 + (e1 -= 10), 515);
+					///enemy1.moveEnemy(300 + (e1 -= 10), 515);
 					
 					
 					DISTANCE_X+=10;
 				}
 				
 			}
+			*/
 		}
 			
 		else if (key == KeyEvent.VK_LEFT) {
+			player.updateXVel(-2);
 			//player.updateVel(0, -5);
 //			player.update();
+			/*
 			checkOOB();
 			checkWall();
 			if (DISTANCE_X < 900 || DISTANCE_X > 4190) {
 				if(collision(HITBOX, WALL_1) == true & collision(HITBOX, WALL_2) != true) {
 					player.movePlayer(validWallML(DISTANCE_X),0);
 					HITBOX.move(validWallML(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 				}
 				
 				else {// if(collision(HITBOX, WALL_2) == true){
 					player.movePlayer(validMoveLeft(DISTANCE_X),0);
-					player.updateVel(-7);
+					player.updateXVel(-7);
 					HITBOX.move(validMoveLeft(DISTANCE_X),0);
 					//
 				}
@@ -645,22 +721,22 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				if(collision(HITBOX, WALL_4) == true & collision(HITBOX, WALL_6) != true) {
 					player.movePlayer(validWallML(DISTANCE_X),0);
 					HITBOX.move(validWallML(DISTANCE_X), 0);
-					player.updateVel(0);	
+					player.updateXVel(0);	
 				}
 				else if(collision(HITBOX, WALL_9) == true & collision(HITBOX, WALL_10) != true) {
 					player.movePlayer(validWallML(DISTANCE_X),0);
 					HITBOX.move(validWallML(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 				}
 				else if(collision(HITBOX, WALL_11) == true & collision(HITBOX, WALL_12) != true) {
 					player.movePlayer(validWallML(DISTANCE_X),0);
 					HITBOX.move(validWallML(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 				}
 				else if(collision(HITBOX, WALL_13) == true & collision(HITBOX, WALL_14) != true) {
 					player.movePlayer(validWallML(DISTANCE_X),0);
 					HITBOX.move(validWallML(DISTANCE_X), 0);
-					player.updateVel(0);
+					player.updateXVel(0);
 				}
 //				else if(collision(HITBOX, WALL_15) == true & collision(HITBOX, WALL_16) != true) {
 //					player.movePlayer(validWallML(DISTANCE_X),0);
@@ -669,7 +745,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 //				}
 				else {
 					player.movePlayer(-1,0);
-					player.updateVel(-7);
+					player.updateXVel(-7);
 					HITBOX.move(-1,0);
 					
 					Background.setLocation(START_LOCATION_X + (i += 10),START_LOCATION_Y);
@@ -722,18 +798,25 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 
 				}
 			}
+			*/
 		}
 	
 		if (key == KeyEvent.VK_SPACE) {
-			DISTANCE_Y = 1;
-			GRAVITY = 0;
-			for (int counter = 10; counter < 70; counter+= 10) {
-				player.movePlayer(2*player.getVel(),-counter);
-				HITBOX.move(2*player.getVel(),-counter);
-				DISTANCE_Y +=10;
+			if(!player.getHasJumped()) {
+				player.updateYVel(-20.0);
+				player.setHasJumped(true);
 			}
-			GRAVITY = 10;
-			DISTANCE_Y -= 70;
+			
+//			DISTANCE_Y = 1;
+//			GRAVITY = 0;
+//			playerYVelocity = 40;
+//			for (int counter = 10; counter < 70; counter+= 10) {
+//				player.movePlayer(2*player.getVel(),-counter);
+//				HITBOX.move(2*player.getVel(),-counter);
+//				DISTANCE_Y +=10;
+//			}
+//			GRAVITY = 10;
+//			DISTANCE_Y -= 70;
 			
 		}
 		// CAN ALWAYS CHANGE FROM 'D' to fire. 
@@ -742,8 +825,60 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		player.updateVel(0);
+		player.updateXVel(0);
 		player.movePlayer(0, 0);
 	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		System.out.println("x: "+ e.getX()+ ",y:" + e.getY());
+	}
+	public void getBounds() {
+		
+		GRectangle playerDY = player.getImage().getBounds();
+		playerDY.setLocation(playerDY.getX(), playerDY.getY() + player.getYVel());
+		
+		GRectangle playerDX = player.getImage().getBounds();
+		playerDX.setLocation(playerDX.getX() + player.getXVel(), playerDX.getY());
+		
+		for(int i = 0; i < bounds.size(); i++) {
+			if(player.getYVel() == 0) {
+				break;
+			}
+			if(collision(playerDY , bounds.get(i).getBounds())) {
+				if(player.getYVel() < 0) {
+					player.getImage().setLocation(player.getX(), bounds.get(i).getY() + bounds.get(i).getHeight()+ 1);
+					player.setVelY(0);
+					System.out.println("Hit condition 2 \n");
+				}
+				else {
+					player.getImage().setLocation(player.getX(), bounds.get(i).getY() - player.getImage().getHeight() -1 );
+					player.setVelY(0);
+					System.out.println("Hit condition 1 \n");
+					
+					
+				}
+			}
+		}
+		for(int i = 0; i < bounds.size(); i++) {
+			if(collision(playerDX , bounds.get(i).getBounds())) {
+				if(player.getXVel() == 0) {
+					return;
+				}
+				if(player.getXVel() > 0) {
+					player.getImage().setLocation(bounds.get(i).getX() + bounds.get(i).getWidth()+ 1, playerDX.getY());
+					player.setVelX(0);
+					System.out.println("Hit condition 3 \n");
+				}
+				else {
+					player.getImage().setLocation (bounds.get(i).getX() - player.getImage().getWidth() -1, playerDX.getY());
+					player.setVelX(0);
+					System.out.println("Hit condition 4 \n");
+				}
+			}
+		}
+		
+	}
+	
+	
 }
 

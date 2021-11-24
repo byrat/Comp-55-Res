@@ -16,10 +16,13 @@ public class Player {
 	private int y = 0;
 	private double dx , dy;
 	
-	private boolean HasJumped;
+	private boolean isMoving = false;
+	private boolean hasJumped;
 	private Weapon banana;
 	private Location location;
 	private MainApplication program;
+	private double maxDX;
+	private double maxDY;
 	
 	private GImage image;
 
@@ -35,12 +38,13 @@ public class Player {
 		image.setSize(100,100);
 		// EACH BLOCK IN MAP IS ABOUT 20 PX. -JT
 		//image.setLocation(0, 510);
+		maxDX = 8;
 		location = new Location(x, y);
 		this.x = x;
 		this.y = y;
 		this.health = health;
 		this.ammo = ammo;
-		HasJumped = false;
+		hasJumped = false;
 		
 	}
 	public double getX() {
@@ -57,7 +61,13 @@ public class Player {
 	}
 		
 
+	public boolean getHasJumped() {
+		return hasJumped;
+	}
 	
+	public void setHasJumped(boolean hasJumped) {
+		this.hasJumped = hasJumped;
+	}
 	
 	public void setHealth(int hp) {
 		this.health = hp;
@@ -85,16 +95,69 @@ public class Player {
 		location.updateLocation(xCoordinate, yCoordinate);
 	}
 	public void update() {
+		if (dx < 1 && dx > -1 && isMoving == false){
+			dx = 0;
+		}
+		if (dy > 2) {
+			dy = 2;
+		}
+		if(isMoving == false && dx != 0) {
+			if(dx > 0) {
+				dx += -0.5;
+			}
+			else {
+				dx += 0.5;
+			}
+		}
+		if(dy < 0 && hasJumped == false) {
+			dy += 3;
+		}
+		else if(dy == -20 && hasJumped == true) {
+			hasJumped = false;
+		}
 		image.move(dx, dy);
+		isMoving = false;
 	}
 	public void movePlayer(double x, double y) {
 			image.move(x, y);
 	}
-	public void updateVel(double x) {
-		this.dx = x;
+	public void updateXVel(double x) {
+		if(dx == 0) {
+			if(x>0) {
+				dx = 3;
+			}
+			else {
+				dx = -3;
+			}
+		}
+		else {
+			dx += x;
+		}
+		isMoving = true;
+		if(dx > maxDX) {
+			dx = maxDX;
+		}
+		else if(dx < maxDX * -1) {
+			dx = maxDX * -1;
+		}
 	}
-	public double getVel() {
+	
+	public double getXVel() {
 		return dx;
+	}
+	public void updateYVel(double y) {
+		this.dy = y;
+	}
+	public double getYVel() {
+		return dy;
+	}
+	public void setVelY(double d) {
+		dy = d;
+		
+	}
+	public void setVelX(double d) {
+		dx = d;
+		
 	}
 	
 	public void show() {
