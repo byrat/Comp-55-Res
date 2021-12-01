@@ -196,9 +196,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		WALL_17.setVisible(false);
 		WALL_18.setVisible(false);
 		
-		//bounds.add(FLOOR_1);
+		bounds.add(FLOOR_1);
 		bounds.add(FLOOR_2);
-		bounds.add(FLOOR_2_1);
+		//bounds.add(FLOOR_2_1);
 		/*bounds.add(FLOOR_3);
 		bounds.add(FLOOR_4);
 		bounds.add(FLOOR_4_1);
@@ -210,14 +210,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	
 		
 //		FLOOR_1.setVisible(false);
-		HITBOX = new GRect(0,510,100,100);
+		HITBOX = new GRect(0,510,100,50);
 		GOAL = new GRect(4200, 0, 100, 9000);
 	
 		
 		
 		
 		///this.CollectionMenu = collection;
-		player = new Player (program , 350 ,515 ,5 ,5);
+		player = new Player (program , 500 ,510 ,600 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		///enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
@@ -287,7 +287,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		program.add(FLOOR_6);
 		program.add(FLOOR_7);
 		
-		program.add(TOP_1);
+		/*program.add(TOP_1);
 		program.add(TOP_2);
 		program.add(TOP_3);
 		program.add(TOP_3_1);
@@ -314,7 +314,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		program.add(WALL_13);
 		program.add(WALL_14);
 		program.add(WALL_15);
-		program.add(WALL_16);
+		program.add(WALL_16);*/
 		
 		player.show();
 		weapon.show();
@@ -598,7 +598,6 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT) {	
 			player.updateXVel(2);
-			/*
 			checkOOB();
 			checkWall();
 			if (DISTANCE_X < 900 || DISTANCE_X > 4190) {
@@ -693,14 +692,13 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				}
 				
 			}
-			*/
+			
 		}
 			
 		else if (key == KeyEvent.VK_LEFT) {
 			player.updateXVel(-2);
 			//player.updateVel(0, -5);
 //			player.update();
-			/*
 			checkOOB();
 			checkWall();
 			if (DISTANCE_X < 900 || DISTANCE_X > 4190) {
@@ -798,7 +796,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 
 				}
 			}
-			*/
+		
 		}
 	
 		if (key == KeyEvent.VK_SPACE) {
@@ -806,17 +804,18 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				player.updateYVel(-20.0);
 				player.setHasJumped(true);
 			}
+			return;
 			
-//			DISTANCE_Y = 1;
-//			GRAVITY = 0;
-//			playerYVelocity = 40;
-//			for (int counter = 10; counter < 70; counter+= 10) {
-//				player.movePlayer(2*player.getVel(),-counter);
-//				HITBOX.move(2*player.getVel(),-counter);
-//				DISTANCE_Y +=10;
-//			}
-//			GRAVITY = 10;
-//			DISTANCE_Y -= 70;
+	/*	DISTANCE_Y = 1;
+			GRAVITY = 0;
+			playerYVelocity = 40;
+			for (int counter = 10; counter < 70; counter+= 10) {
+				player.movePlayer(2*player.getVel(),-counter);
+			HITBOX.move(2*player.getVel(),-counter);
+			DISTANCE_Y +=10;
+			}
+			GRAVITY = 10;
+			DISTANCE_Y -= 70;*/
 			
 		}
 		// CAN ALWAYS CHANGE FROM 'D' to fire. 
@@ -825,8 +824,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		player.updateXVel(0);
-		player.movePlayer(0, 0);
+		//player.updateXVel(0);
+		//player.movePlayer(0, 0);
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -845,15 +844,17 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				break;
 			}
 			if(collision(playerDY , bounds.get(i).getBounds())) {
-				if(player.getYVel() < 0) {
-					player.getImage().setLocation(player.getX(), bounds.get(i).getY() + bounds.get(i).getHeight()+ 1);
+				//check to see if player was above box previously
+				if(bounds.get(i).getY() > player.getY() + player.getHeight() ) {
+					player.getImage().setLocation(player.getX(), bounds.get(i).getY() - player.getHeight() - 1);
 					player.setVelY(0);
-					System.out.println("Hit condition 2 \n");
+					System.out.println("Hit top of a block\n");
 				}
-				else {
-					player.getImage().setLocation(player.getX(), bounds.get(i).getY() - player.getImage().getHeight() -1 );
+				//player hits box from below
+				else if(player.getY() > bounds.get(i).getY() + bounds.get(i).getHeight()) {
+					player.getImage().setLocation(player.getX(), bounds.get(i).getY() + bounds.get(i).getHeight() + 1 );
 					player.setVelY(0);
-					System.out.println("Hit condition 1 \n");
+					System.out.println("Hit bottom of block \n");
 					
 					
 				}
@@ -864,15 +865,16 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				if(player.getXVel() == 0) {
 					return;
 				}
-				if(player.getXVel() > 0) {
-					player.getImage().setLocation(bounds.get(i).getX() + bounds.get(i).getWidth()+ 1, playerDX.getY());
+				//player hit box to the right
+				if(player.getX() > bounds.get(i).getX() + bounds.get(i).getWidth()) {
+					player.getImage().setLocation(bounds.get(i).getX() + bounds.get(i).getWidth()+ 1 + player.getWidth(), player.getY());
 					player.setVelX(0);
-					System.out.println("Hit condition 3 \n");
+					System.out.println("Hit block right \n");
 				}
-				else {
+				else if(player.getX() + player.getWidth() < bounds.get(i).getX() -1){
 					player.getImage().setLocation (bounds.get(i).getX() - player.getImage().getWidth() -1, playerDX.getY());
 					player.setVelX(0);
-					System.out.println("Hit condition 4 \n");
+					System.out.println("Hit block left \n");
 				}
 			}
 		}

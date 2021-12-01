@@ -45,6 +45,7 @@ public class Player {
 		this.health = health;
 		this.ammo = ammo;
 		hasJumped = false;
+		dx = dy = 0;
 		
 	}
 	public double getX() {
@@ -98,36 +99,36 @@ public class Player {
 		if (dx < 1 && dx > -1 && isMoving == false){
 			dx = 0;
 		}
-		if (dy > 2) {
-			dy = 2;
-		}
 		if(isMoving == false && dx != 0) {
 			if(dx > 0) {
 				dx += -0.5;
 			}
 			else {
 				dx += 0.5;
-			}
+			
+			
 		}
-		if(dy < 0 && hasJumped == false) {
-			dy += 3;
-		}
-		else if(dy == -20 && hasJumped == true) {
+	}
+		
+		if(dy <= -10 && hasJumped == true) {
 			hasJumped = false;
 		}
 		image.move(dx, dy);
 		isMoving = false;
 	}
 	public void movePlayer(double x, double y) {
+			System.out.println("movePlayer called \n");
 			image.move(x, y);
 	}
 	public void updateXVel(double x) {
+		System.out.println("player x velocity updated with " + x + "\n");
+		
 		if(dx == 0) {
-			if(x>0) {
+			if(x > 0) {
 				dx = 3;
 			}
 			else {
-				dx = -3;
+				dx = 3;
 			}
 		}
 		else {
@@ -146,7 +147,7 @@ public class Player {
 		return dx;
 	}
 	public void updateYVel(double y) {
-		this.dy = y;
+		this.dy += y;
 	}
 	public double getYVel() {
 		return dy;
@@ -156,6 +157,7 @@ public class Player {
 		
 	}
 	public void setVelX(double d) {
+		System.out.println("player x velocity set to:  " + d + "\n");
 		dx = d;
 		
 	}
