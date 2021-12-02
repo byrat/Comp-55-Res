@@ -11,15 +11,16 @@
 /GParagraph.class
 /GraphicsGame.class
 /GraphicsPane.class
+/Health.class
 /Interfaceable.class
 /Location.class
 /MainApplication.class
 /MenuPane.class
 /MovementMechanics.class
+/Obstacle.class
 /Player.class
 /Projectiles$1.class
 /Projectiles.class
 /SettingsMenu.class
 /SomePane.class
 /Weapon.class
-/Obstacle.class

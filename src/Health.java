@@ -10,18 +10,26 @@ public class Health {
 	private MainApplication app;
 	
 	
-	public Health(MainApplication app, int health) {
+	public Health(MainApplication app, int health,int x, int y) {
 		this.app = app;
 		player = new Player(app, health, health, health, health);
 		player.setHealth(health);
 		firstHealth = new GImage("media/Health/FullHealthBar.png", 700 , 800);
-		firstHealth.setSize(20, 30);
+		firstHealth.setSize(x, y);
 	}
 	
-//	public void playerGetsHit() {
-//		if(isHit.detectCollision() == true) {
-//			
-//		}
-//	}
+	public void playerGetsHit() {
+		if(isHit.detectCollision() == true) {
+			player.decrementHeatlh();
+		}
+	}
 	
+	
+	
+	public GImage decreasedHealthBar() {
+		secondHealth = new GImage("media/Health/decreasedHealthBar.png", 700, 800);
+		secondHealth.setSize(5800, 5800);
+		return secondHealth;
+		
+	}
 }
