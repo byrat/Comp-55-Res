@@ -23,6 +23,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Collection CollectionMenu;
 	Player player;
 	Enemy enemy1;
+	Health health;
 	Timer timer;
 	Weapon weapon;
 	Location loc;
@@ -219,6 +220,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		///this.CollectionMenu = collection;
 		player = new Player (program , 500 ,510 ,600 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
+		health = new Health(program, 3);
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		///enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
 	}
