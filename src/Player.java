@@ -130,6 +130,7 @@ public class Player {
 			else {
 				dx = 3;
 			}
+
 		}
 		else {
 			dx += x;
@@ -144,6 +145,10 @@ public class Player {
 	}
 	
 	public double getXVel() {
+		return dx;
+	}
+	
+	public double getXValupdated() {
 		return dx;
 	}
 	public void updateYVel(double y) {
@@ -178,5 +183,14 @@ public class Player {
 		System.out.print("X Location: " + firstTest.getXAxis() + "\n");
 		
 		System.out.print("Y Location: " + firstTest.getYAxis());
+		
+		System.out.print("X Location: " + firstTest.getXAxis() + firstTest.getXAxis()+ "\n");
+		
+		System.out.print("Y Location: " + firstTest.getYAxis() + firstTest.getYAxis());
 	}
+	
+	// public void updateLocation() {
+	// 	location.setXAxis(location.getXAxis());
+	// 	location.setYAxis(location.getYAxis());
+	// }
 }
