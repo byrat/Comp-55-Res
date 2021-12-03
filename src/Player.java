@@ -1,6 +1,8 @@
 import javax.print.attribute.standard.Media;
 
 import acm.graphics.GImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player {
 	
@@ -26,6 +28,8 @@ public class Player {
 	
 	private GImage image;
 	Direction playerDirection;
+	
+	private boolean canShoot = true;
 
 	public GImage getImage() {
 		return image;
@@ -62,7 +66,27 @@ public class Player {
 	public double getWidth() {
 		return image.getWidth();
 	}
-		
+	
+	public void setCanShoot(boolean canShoot) { 
+		this.canShoot = canShoot;
+		Timer shootTimer = new Timer();
+		shootTimer.schedule(new TimerTask() {
+			int counter = 0;
+			@Override
+			public void run() {
+				counter++;
+				System.out.println("Counter = " + counter);
+				if (counter == 3) { // After 3 seconds, the player is allowed to shoot again
+					shootTimer.cancel();
+					Player.this.canShoot = true;
+				}
+				
+			}
+		}, 0, Math.abs(1 * 1000));
+	} 
+	
+	public boolean getCanShoot() { return canShoot; } 
+	
 	void setPlayerDirectionSprite(Direction d) {
 		int tempX = (int) getImage().getX();
 		int tempY = (int) getImage().getY();
