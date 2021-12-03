@@ -22,29 +22,37 @@ public class Projectiles {
 	private Location positon, start, target;
 
 	private double slopeNum, slopeDen, slope;
-
+	
+	private boolean isPlayerShooting;
+	
 	MainApplication app;
 	Player player;
 	Timer projectileTimer;
 	private double seconds = 0.1;
 	private int updateTime = (int) Math.abs(seconds * 1000);
 	
-	public Projectiles(MainApplication app, Location position, Location target, double speed, String spriteString, boolean isPlayer) {
+	public Projectiles(MainApplication app, Location position, Location target, double speed, String spriteString, boolean isPlayerShooting) {
 		this.app = app;
 		this.positon = position;
 		this.start = new Location(position.getXAxis(), position.getYAxis());
 		this.target = target;
 		this.isPlayer = false;
-		
+		this.isPlayerShooting = isPlayerShooting;
 		
 		
 		slopeNum = target.getYAxis() - start.getYAxis();
 		slopeDen = target.getXAxis() - start.getXAxis();
 		slope = slopeNum / slopeDen;
-
+		
+		if (spriteString == "banana_b" && isPlayerShooting == true) {
+			IMG_PATH = "media/fruits/";
+			System.out.println("Path= " + IMG_PATH + spriteString + IMG_PATH_SUFFIX);
+		}
 		sprite = new GImage(IMG_PATH + spriteString + IMG_PATH_SUFFIX);
 		sprite.setLocation(start.getXAxis(), start.getYAxis());
 		sprite.scale(0.1);
+		
+		if (spriteString == "banana_b" && isPlayerShooting == true) { sprite.scale(2.5); } 
 		
 		show();
 
@@ -54,15 +62,20 @@ public class Projectiles {
 			public void run() {
 				sprite.move(slopeDen * seconds, slopeNum * seconds);
 				player = app.getGame().getPlayer();
-				if (sprite.getLocation().getX() < 0 || sprite.getLocation().getY() < 0) {
+				if (sprite.getLocation().getX() < 0 || sprite.getLocation().getY() < 0 ||
+						sprite.getLocation().getX() > 1920 || sprite.getLocation().getY() > 1080) {
 					projectileTimer.cancel();
 					hide();
 					System.out.println("Projectile Flew Out of Bounds");
-				} else if (detectCollision(false) == true) {
+				} else if (detectCollision(false) == true && isPlayerShooting == false) { // Enemy shot at player
 					System.out.println("Detected Collision");
 					projectileTimer.cancel();
 					hide();
 					player.decrementHeatlh();
+				} else if (detectCollision(true) == true && isPlayerShooting == true) { // player is shooting at enemies
+					// kill enemy here
+					projectileTimer.cancel();
+					hide();
 				}
 			}
 		}, 0, updateTime); 
@@ -120,7 +133,9 @@ public class Projectiles {
 					player.getImage().contains(spriteRightSideX, spriteBottomCornerY))  {
 				return true;
 			}
-		} 
+		} else {
+			;
+		}
 		
 		return false;
 	}

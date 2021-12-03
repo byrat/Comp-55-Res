@@ -190,6 +190,10 @@ public class Player {
 		
 	}
 	
+	public Direction getDirection() {
+		return playerDirection;
+	}
+	
 	public void show() {
 		program.add(image);
 	}

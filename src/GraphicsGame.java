@@ -22,7 +22,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	PINEAPPLE(""),*/
 	Collection CollectionMenu;
 	Player player;
-	Enemy enemy1;
+	ArrayList<Enemy> arrayOfEnemies = new ArrayList<Enemy>();
 	Health health;
 	Timer timer;
 	Weapon weapon;
@@ -221,6 +221,10 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player = new Player (program , 0 ,510 ,600 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
 		health = new Health(program, 3, 900, 900);
+		
+		arrayOfEnemies.add(new Enemy(program, new Location(700, 510), Difficulty.EASY, false));
+		arrayOfEnemies.add(new Enemy(program, new Location(900, 510), Difficulty.HARD, false));
+		
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		///enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
 	}
@@ -331,7 +335,17 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		timer.start();
 		
 	
-		
+//		for (Enemy enemy:arrayOfEnemies) {
+//			enemy.show();
+//			
+//			enemy.startTimer();
+//			while (enemy.isEnemyAlive() == true) {
+//				// add check to see if player is still alive here, if not then break out of while loop and for loop and show end game screen
+//				;
+//			} 
+//			enemy.pauseTimer();
+//			
+//		}
 		
 		
 
@@ -824,7 +838,20 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 			
 		}
 		// CAN ALWAYS CHANGE FROM 'D' to fire. 
-		if (key == KeyEvent.VK_D) {
+		if (key == KeyEvent.VK_F) {
+			Location originLocation = new Location((int)player.getImage().getX(), (int)player.getImage().getY());
+			if (player.getDirection() == Direction.EAST) {
+				Location targetLocation = new Location(1920, (int)player.getImage().getY());
+				new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
+				System.out.println("Created Monkey Bullet");
+				System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
+			} else if (player.getDirection() == Direction.WEST) {
+				Location targetLocation = new Location(0, (int)player.getImage().getY());
+				new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
+				System.out.println("Created Monkey Bullet");
+				System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
+				
+			}
 		}
 	}
 	@Override
@@ -834,7 +861,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("x: "+ e.getX()+ ",y:" + e.getY());
+//		System.out.println("x: "+ e.getX()+ ",y:" + e.getY());
 	}
 	public void getBounds() {
 		
@@ -854,13 +881,13 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 					player.getImage().setLocation(player.getX(), bounds.get(i).getY() - player.getHeight() - 1);
 					player.setVelY(0);
 					//HITBOX.setLocation(HITBOX.getX(), HITBOX.getY() - player.getHeight() - 1)
-					System.out.println("Hit top of a block\n");
+//					System.out.println("Hit top of a block\n");
 				}
 				//player hits box from below
 				else if(player.getY() > bounds.get(i).getY() + bounds.get(i).getHeight()) {
 					player.getImage().setLocation(player.getX(), bounds.get(i).getY() + bounds.get(i).getHeight() + 1 );
 					player.setVelY(0);
-					System.out.println("Hit bottom of block \n");
+//					System.out.println("Hit bottom of block \n");
 					
 					
 				}
@@ -875,12 +902,12 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				if(player.getX() > bounds.get(i).getX() + bounds.get(i).getWidth()) {
 					player.getImage().setLocation(bounds.get(i).getX() + bounds.get(i).getWidth()+ 1 + player.getWidth(), player.getY());
 					player.setVelX(0);
-					System.out.println("Hit block right \n");
+//					System.out.println("Hit block right \n");
 				}
 				else if(player.getX() + player.getWidth() < bounds.get(i).getX() -1){
 					player.getImage().setLocation (bounds.get(i).getX() - player.getImage().getWidth() -1, playerDX.getY());
 					player.setVelX(0);
-					System.out.println("Hit block left \n");
+//					System.out.println("Hit block left \n");
 				}
 			}
 		}

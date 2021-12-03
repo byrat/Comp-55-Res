@@ -25,14 +25,14 @@ public class Enemy { // TODO Implement the other classes this one needs
     private double firingRate;
     private Weapon enemyWeapon;
     private GImage enemySprite;
-    String IMG_PATH = "media/characters/";
-    String IMG_PNG_SUFFIX = ".png";
+    private String IMG_PATH = "media/characters/";
+    private String IMG_PNG_SUFFIX = ".png";
     
-    double seconds;
+    private double seconds;
 
-    Difficulty difficulty;
-    double difficultyWeight;
-
+    private Difficulty difficulty;
+    private double difficultyWeight;
+    private boolean isAlive = true;
 
     public Enemy(MainApplication app, Location enemyLocation, Difficulty difficulty, boolean isBoss) { //! Delete the String MSG Parameter
     	this.app = app;
@@ -62,24 +62,7 @@ public class Enemy { // TODO Implement the other classes this one needs
         }
         
         enemySprite.setLocation(enemyLocation.getXAxis(), enemyLocation.getYAxis());
-        
-//        enemyTimer = new Timer(); 
-//        enemyTimer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//            	if (app.getGame() != null) {
-//            		player =  app.getGame().getPlayer();
-//            		GImage playerSprite = app.getGame().getPlayer().getImage();
-//                    Location playerLocation = new Location((int) playerSprite.getLocation().getX(), (int) playerSprite.getLocation().getY());
-//                    Projectiles fireAtPlayer = new Projectiles(app, enemyLocation, playerLocation, 0, "bullet");
-//            	}
-//            	if (player.getHealth() == 0) {
-//                	System.out.println("Player is dead");
-//                	player.hide();
-//                	enemyTimer.cancel();
-//                }
-//            }
-//        }, 0, (int) Math.abs(seconds * 1000));
+  
     }
     
     public void startTimer() {
@@ -92,7 +75,7 @@ public class Enemy { // TODO Implement the other classes this one needs
             		GImage playerSprite = app.getGame().getPlayer().getImage();
                     Location playerLocation = new Location((int) playerSprite.getLocation().getX(), (int) playerSprite.getLocation().getY());
                     Location enemyLocation = new Location((int)enemySprite.getX(), (int)enemySprite.getY());
-                    Projectiles fireAtPlayer = new Projectiles(app, enemyLocation, playerLocation, 0, "bullet");
+                    Projectiles fireAtPlayer = new Projectiles(app, enemyLocation, playerLocation, 0, "bullet", false);
             	}
             	if (player.getHealth() == 0) {
                 	System.out.println("Player is dead");
@@ -109,9 +92,8 @@ public class Enemy { // TODO Implement the other classes this one needs
 
     
     
-    boolean isEnemyAlive() {
-        // TODO implement logic: If Enemy == dead --> enemyTimer.cancel()
-        return true; //! Change this later
+    public boolean isEnemyAlive() {
+        return isAlive;
     }
     
     public void moveEnemy(double x, double y) {
