@@ -284,15 +284,19 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		return 7;
 	}
 	public void wave() {
+		// CREATE LEFT SIDE SPAWN
 		Random r = new Random();
 		int low = 0;
 		int high = 300;
 		int result = r.nextInt(high-low) + low;
 		
+		//  CREATE RIGHT SIDE SPAWN
 		Random r2 = new Random();
 		int low2 = 700;
 		int high2 = 1000;
 		int result2 = r2.nextInt(high2-low2) + low2;
+		
+		// ADDS NEW ENEMIES TO WAVE
 		arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.EASY, false));
 		arrayOfEnemies.add(new Enemy(program, new Location(result2, 540), Difficulty.EASY, false));
 	}
@@ -335,7 +339,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		}
 		if (key == KeyEvent.VK_SPACE) {
 			if(!player.getHasJumped()) {
-				player.updateYVel(-20.0);
+				player.updateYVel(-30.0);
 				player.setHasJumped(true);
 			}
 			return;			
