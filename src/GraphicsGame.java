@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
@@ -31,6 +32,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	private Projectiles projectile;
 	
 	private GImage Background;
+	private int counter = 0;
 	private GRect FLOOR_1,FLOOR_2, FLOOR_2_1, FLOOR_3,FLOOR_4,FLOOR_4_1,FLOOR_4_2, FLOOR_5, FLOOR_6, FLOOR_7;
 	
 	public static final int MAP_WIDTH = 9174;//800;
@@ -125,8 +127,10 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 //		health.playerGetsHitOnce(player);
 //		health.playerGetsHitTwice(player);
 		
-		arrayOfEnemies.add(new Enemy(program, new Location(1600, 510), Difficulty.EASY, false));
-//		arrayOfEnemies.add(new Enemy(program, new Location(900, 510), Difficulty.HARD, false));
+		// ADDING TWO ENEMIES BEWTEEN TWO POINTS
+		
+//		arrayOfEnemies.add(new Enemy(program, new Location(100, 510), Difficulty.EASY, false));
+//		arrayOfEnemies.add(new Enemy(program, new Location(700, 510), Difficulty.EASY, false));
 		
 		//projectile = new Projectiles(program, "media/fruits/banana.png", Direction.WEST, 1);
 		///enemy1 = new Enemy(program, new Location(300, 515), Difficulty.MEDIUM, false);
@@ -200,16 +204,18 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.show();
 		weapon.show();
 		health.show();
-		///enemy1.show();
 		
-		for (Enemy e:arrayOfEnemies) {
-			e.show();
-			e.startTimer();
-		}
-		
-		///Start game loop
 		timer = new Timer (10 , this);
 		timer.start();
+		
+		///enemy1.show();
+		
+//		for (Enemy e:arrayOfEnemies) {
+//			e.show();
+//			e.startTimer();
+//		}
+		
+		///Start game loop
 		
 	
 //		for (Enemy enemy:arrayOfEnemies) {
@@ -277,16 +283,37 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		}
 		return 7;
 	}
+	public void wave() {
+		Random r = new Random();
+		int low = 0;
+		int high = 300;
+		int result = r.nextInt(high-low) + low;
+		
+		Random r2 = new Random();
+		int low2 = 700;
+		int high2 = 1000;
+		int result2 = r2.nextInt(high2-low2) + low2;
+		arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.EASY, false));
+		arrayOfEnemies.add(new Enemy(program, new Location(result2, 540), Difficulty.EASY, false));
+	}
 	
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		counter++;
 		player.updateYVel(2);
 		getBounds();
 		player.update();
+		if( counter % 100 == 0) {
+			wave();
+			for (Enemy enem:arrayOfEnemies) {
+				enem.show();
+				enem.startTimer();
+			}
+			
+		}
 		return;
-		
 	}
 		
 	
@@ -303,7 +330,6 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		else if (key == KeyEvent.VK_LEFT) {
 			player.setPlayerDirectionSprite(Direction.WEST);
 			player.updateXVel(-2);
-			checkOOB();
 			player.movePlayer(validMoveLeft(DISTANCE_X),0);
 			checkOOB();	
 		}
