@@ -14,8 +14,9 @@ public class Health {
 		this.app = app;
 		player = new Player(app, health, health, health, health);
 		player.setHealth(health);
-		firstHealth = new GImage("media/Health/FullHealthBar.png", 700 , 800);
-		firstHealth.setSize(x, y);
+		firstHealth = new GImage("media/Health/FullHealthBar-removebg-preview.png", 700 , 800);
+		firstHealth.setLocation(x, y);
+		firstHealth.setSize(140, 225);
 	}
 	
 	public void playerGetsHit() {
