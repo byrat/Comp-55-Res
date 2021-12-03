@@ -11,6 +11,7 @@ public class Projectiles {
 	private GImage sprite;
 	private String IMG_PATH = "media/weapons/";
 	private String IMG_PATH_SUFFIX = ".png";
+	private boolean isPlayer;  
 	
 	private int ENEMY_DAMAGE = 1 * DIFFICULTY; 
 	private int PLAYER_DAMAGE = 1;
@@ -28,11 +29,12 @@ public class Projectiles {
 	private double seconds = 0.1;
 	private int updateTime = (int) Math.abs(seconds * 1000);
 	
-	public Projectiles(MainApplication app, Location position, Location target, double speed, String spriteString) {
+	public Projectiles(MainApplication app, Location position, Location target, double speed, String spriteString, boolean isPlayer) {
 		this.app = app;
 		this.positon = position;
 		this.start = new Location(position.getXAxis(), position.getYAxis());
 		this.target = target;
+		this.isPlayer = false;
 		
 		
 		
@@ -74,6 +76,15 @@ public class Projectiles {
 	
 	public void setSprite(GImage s) {
 		sprite = s;
+	}
+	
+	
+	public boolean setIsPlayer(boolean s) {
+		return s = isPlayer;
+	}
+	
+	public boolean getIsPlayer() {
+		return isPlayer;
 	}
 	
 	public void setDamage(int dm) {

@@ -19,7 +19,7 @@ public class Health {
 	}
 	
 	public void playerGetsHit() {
-		if(isHit.detectCollision() == true) {
+		if(isHit.detectCollision(isHit.getIsPlayer()) == true) {
 			player.decrementHeatlh();
 		}
 	}
