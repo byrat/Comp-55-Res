@@ -33,6 +33,7 @@ public class Enemy { // TODO Implement the other classes this one needs
     private Difficulty difficulty;
     private double difficultyWeight;
     private boolean isAlive = true;
+    private int health;
 
     public Enemy(MainApplication app, Location enemyLocation, Difficulty difficulty, boolean isBoss) { //! Delete the String MSG Parameter
     	this.app = app;
@@ -45,20 +46,23 @@ public class Enemy { // TODO Implement the other classes this one needs
                 enemySprite = new GImage(IMG_PATH + "hunter easy" + IMG_PNG_SUFFIX);
                 enemySprite.scale(0.30);
                 seconds = 2.75;
+                health = 1;
             } else if (difficulty == Difficulty.MEDIUM) {
                 enemySprite = new GImage(IMG_PATH + "hunter medium" + IMG_PNG_SUFFIX);
                 enemySprite.scale(0.15);
                 seconds = 1;
+                health = 2;
             } else if (difficulty == Difficulty.HARD) {
                 enemySprite = new GImage(IMG_PATH + "hunter hard" + IMG_PNG_SUFFIX);
                 enemySprite.scale(0.5);
                 seconds = 0.75;
+                health = 3;
             } 
         } else {
             enemySprite = new GImage(IMG_PATH + "bossSprite" + IMG_PNG_SUFFIX);
             enemySprite.scale(0.5);
             seconds = 0.15;
-            
+            health = 10;
         }
         
         enemySprite.setLocation(enemyLocation.getXAxis(), enemyLocation.getYAxis());
@@ -87,10 +91,12 @@ public class Enemy { // TODO Implement the other classes this one needs
     }
     
     public void pauseTimer() {
-    	enemyTimer.cancel(); // hello
+    	enemyTimer.cancel(); 
     }
 
     
+    public int getHealth() { return health; }
+    public void decrementHealth() { health--; }
     
     public boolean isEnemyAlive() {
         return isAlive;
