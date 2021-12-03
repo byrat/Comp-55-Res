@@ -33,7 +33,9 @@ public class Projectiles {
 		this.positon = position;
 		this.start = new Location(position.getXAxis(), position.getYAxis());
 		this.target = target;
-
+		
+		
+		
 		slopeNum = target.getYAxis() - start.getYAxis();
 		slopeDen = target.getXAxis() - start.getXAxis();
 		slope = slopeNum / slopeDen;
@@ -54,7 +56,7 @@ public class Projectiles {
 					projectileTimer.cancel();
 					hide();
 					System.out.println("Projectile Flew Out of Bounds");
-				} else if (detectCollision() == true) {
+				} else if (detectCollision(false) == true) {
 					System.out.println("Detected Collision");
 					projectileTimer.cancel();
 					hide();
@@ -90,22 +92,24 @@ public class Projectiles {
 		app.remove(sprite);
 	}
 	
-	public boolean detectCollision() {
-		double spriteLeftSideX= Math.floor(sprite.getLocation().getX() - 1);
-		double spriteRightSideX = Math.floor((sprite.getLocation().getX() + sprite.getWidth()) + 1);
-		
-		double spriteTopCornerY = Math.floor(sprite.getLocation().getY());
-		double spriteMiddleY = Math.floor(sprite.getLocation().getY() + (sprite.getHeight() / 2));
-		double spriteBottomCornerY = Math.floor(sprite.getLocation().getY() + sprite.getHeight());
-		
-		if (player.getImage().contains(spriteLeftSideX, spriteTopCornerY) ||
-				player.getImage().contains(spriteLeftSideX, spriteMiddleY) || 
-				player.getImage().contains(spriteLeftSideX, spriteBottomCornerY) ||
-				player.getImage().contains(spriteRightSideX, spriteTopCornerY) ||
-				player.getImage().contains(spriteRightSideX, spriteMiddleY) ||
-				player.getImage().contains(spriteRightSideX, spriteBottomCornerY))  {
-			return true;
-		}
+	public boolean detectCollision(boolean isPlayer) {
+		if (isPlayer == false) { // player is the one being targeted
+			double spriteLeftSideX= Math.floor(sprite.getLocation().getX() - 1);
+			double spriteRightSideX = Math.floor((sprite.getLocation().getX() + sprite.getWidth()) + 1);
+			
+			double spriteTopCornerY = Math.floor(sprite.getLocation().getY());
+			double spriteMiddleY = Math.floor(sprite.getLocation().getY() + (sprite.getHeight() / 2));
+			double spriteBottomCornerY = Math.floor(sprite.getLocation().getY() + sprite.getHeight());
+			
+			if (player.getImage().contains(spriteLeftSideX, spriteTopCornerY) ||
+					player.getImage().contains(spriteLeftSideX, spriteMiddleY) || 
+					player.getImage().contains(spriteLeftSideX, spriteBottomCornerY) ||
+					player.getImage().contains(spriteRightSideX, spriteTopCornerY) ||
+					player.getImage().contains(spriteRightSideX, spriteMiddleY) ||
+					player.getImage().contains(spriteRightSideX, spriteBottomCornerY))  {
+				return true;
+			}
+		} 
 		
 		return false;
 	}

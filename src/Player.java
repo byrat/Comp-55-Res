@@ -25,6 +25,7 @@ public class Player {
 	private double maxDY;
 	
 	private GImage image;
+	Direction playerDirection;
 
 	public GImage getImage() {
 		return image;
@@ -34,7 +35,8 @@ public class Player {
 	
 	public Player (MainApplication app, int x, int y, int health, int ammo) {
 		program = app;
-		image = new GImage("media/characters/monkey.png", x , y);
+		image = new GImage("media/characters/monkey_east.png", x , y);
+		playerDirection = Direction.EAST;
 		image.setSize(100,100);
 		// EACH BLOCK IN MAP IS ABOUT 20 PX. -JT
 		//image.setLocation(0, 510);
@@ -61,6 +63,24 @@ public class Player {
 		return image.getWidth();
 	}
 		
+	void setPlayerDirectionSprite(Direction d) {
+		int tempX = (int) getImage().getX();
+		int tempY = (int) getImage().getY();
+		program.remove(image);
+		if (d == Direction.WEST) {
+			playerDirection = Direction.WEST;
+			image = new GImage("media/characters/monkey_west.png", tempX,tempY);
+		} else if (d == Direction.EAST) {
+			playerDirection = Direction.EAST;
+			image = new GImage("media/characters/monkey_east.png", tempX,tempY);
+		}
+		image.setSize(100, 100);
+		program.add(image);
+	}
+	
+//	public void shoot() {
+//		new Projectiles(program, new Location((int) image.getX(), (int)image.getY()), , ammo, IMG_EXTENSION)
+//	}
 
 	public boolean getHasJumped() {
 		return hasJumped;
@@ -95,6 +115,7 @@ public class Player {
 	public void updatePlayerLocation(int xCoordinate, int yCoordinate) {
 		location.updateLocation(xCoordinate, yCoordinate);
 	}
+	
 	public void update() {
 		if (dx < 1 && dx > -1 && isMoving == false){
 			dx = 0;
@@ -116,12 +137,14 @@ public class Player {
 		image.move(dx, dy);
 		isMoving = false;
 	}
+	
 	public void movePlayer(double x, double y) {
-			System.out.println("movePlayer called \n");
+//			System.out.println("movePlayer called \n");
 			image.move(x, y);
 	}
+	
 	public void updateXVel(double x) {
-		System.out.println("player x velocity updated with " + x + "\n");
+//		System.out.println("player x velocity updated with " + x + "\n");
 		
 		if(dx == 0) {
 			if(x > 0) {
@@ -162,7 +185,7 @@ public class Player {
 		
 	}
 	public void setVelX(double d) {
-		System.out.println("player x velocity set to:  " + d + "\n");
+//		System.out.println("player x velocity set to:  " + d + "\n");
 		dx = d;
 		
 	}
@@ -173,20 +196,16 @@ public class Player {
 	public void hide() {
 		program.remove(image);
 	}
-	// public void updateLocation() {
-	// 	location.setXAxis(location.getXAxis());
-	// 	location.setYAxis(location.getYAxis());
-	// }
 	
 	public static void main(String[] args) {
 		Location firstTest = new Location(2,3);
-		System.out.print("X Location: " + firstTest.getXAxis() + "\n");
+//		System.out.print("X Location: " + firstTest.getXAxis() + "\n");
 		
-		System.out.print("Y Location: " + firstTest.getYAxis());
+//		System.out.print("Y Location: " + firstTest.getYAxis());
 		
-		System.out.print("X Location: " + firstTest.getXAxis() + firstTest.getXAxis()+ "\n");
+//		System.out.print("X Location: " + firstTest.getXAxis() + firstTest.getXAxis()+ "\n");
 		
-		System.out.print("Y Location: " + firstTest.getYAxis() + firstTest.getYAxis());
+//		System.out.print("Y Location: " + firstTest.getYAxis() + firstTest.getYAxis());
 	}
 	
 	// public void updateLocation() {
