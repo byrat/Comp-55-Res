@@ -222,7 +222,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		///this.CollectionMenu = collection;
 		player = new Player (program , 0 ,510 ,600 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
-		health = new Health(program, 3, 900, 900);
+		health = new Health(program, 3, 1300, -88);
 		
 		arrayOfEnemies.add(new Enemy(program, new Location(1600, 510), Difficulty.EASY, false));
 //		arrayOfEnemies.add(new Enemy(program, new Location(900, 510), Difficulty.HARD, false));
