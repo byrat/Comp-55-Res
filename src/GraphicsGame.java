@@ -846,18 +846,21 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		}
 		// CAN ALWAYS CHANGE FROM 'D' to fire. 
 		if (key == KeyEvent.VK_F) {
-			Location originLocation = new Location((int)player.getImage().getX(), (int)player.getImage().getY());
-			if (player.getDirection() == Direction.EAST) {
-				Location targetLocation = new Location(1920, (int)player.getImage().getY());
-				new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
-				System.out.println("Created Monkey Bullet");
-				System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
-			} else if (player.getDirection() == Direction.WEST) {
-				Location targetLocation = new Location(0, (int)player.getImage().getY());
-				new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
-				System.out.println("Created Monkey Bullet");
-				System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
-				
+			if (player.getCanShoot() == true) {
+				player.setCanShoot(false);
+				Location originLocation = new Location((int)player.getImage().getX(), (int)player.getImage().getY());
+				if (player.getDirection() == Direction.EAST) {
+					Location targetLocation = new Location(1920, (int)player.getImage().getY());
+					new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
+					System.out.println("Created Monkey Bullet");
+					System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
+				} else if (player.getDirection() == Direction.WEST) {
+					Location targetLocation = new Location(0, (int)player.getImage().getY());
+					new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
+					System.out.println("Created Monkey Bullet");
+					System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
+					
+				}
 			}
 		}
 	}
