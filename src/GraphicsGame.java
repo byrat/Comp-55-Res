@@ -599,7 +599,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_RIGHT) {	
+		if(key == KeyEvent.VK_RIGHT) {
+			player.setPlayerDirectionSprite(Direction.EAST);
 			player.updateXVel(2);
 			checkOOB();
 			checkWall();
@@ -697,6 +698,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 			}
 			
 		else if (key == KeyEvent.VK_LEFT) {
+			player.setPlayerDirectionSprite(Direction.WEST);
 			player.updateXVel(-2);
 			//player.updateVel(0, -5);
 //			player.update();

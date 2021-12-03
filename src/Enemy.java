@@ -9,6 +9,7 @@ import acm.graphics.GImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import acm.graphics.GLabel;
+import acm.graphics.GPoint;
 import acm.program.GraphicsProgram;
 
 import java.util.Timer;
@@ -62,14 +63,35 @@ public class Enemy { // TODO Implement the other classes this one needs
         
         enemySprite.setLocation(enemyLocation.getXAxis(), enemyLocation.getYAxis());
         
-        enemyTimer = new Timer(); 
-        enemyTimer.schedule(new TimerTask() {
+//        enemyTimer = new Timer(); 
+//        enemyTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//            	if (app.getGame() != null) {
+//            		player =  app.getGame().getPlayer();
+//            		GImage playerSprite = app.getGame().getPlayer().getImage();
+//                    Location playerLocation = new Location((int) playerSprite.getLocation().getX(), (int) playerSprite.getLocation().getY());
+//                    Projectiles fireAtPlayer = new Projectiles(app, enemyLocation, playerLocation, 0, "bullet");
+//            	}
+//            	if (player.getHealth() == 0) {
+//                	System.out.println("Player is dead");
+//                	player.hide();
+//                	enemyTimer.cancel();
+//                }
+//            }
+//        }, 0, (int) Math.abs(seconds * 1000));
+    }
+    
+    public void startTimer() {
+    	enemyTimer = new Timer();
+    	enemyTimer.schedule(new TimerTask() {
             @Override
             public void run() {
             	if (app.getGame() != null) {
             		player =  app.getGame().getPlayer();
             		GImage playerSprite = app.getGame().getPlayer().getImage();
                     Location playerLocation = new Location((int) playerSprite.getLocation().getX(), (int) playerSprite.getLocation().getY());
+                    Location enemyLocation = new Location((int)enemySprite.getX(), (int)enemySprite.getY());
                     Projectiles fireAtPlayer = new Projectiles(app, enemyLocation, playerLocation, 0, "bullet");
             	}
             	if (player.getHealth() == 0) {
@@ -80,7 +102,13 @@ public class Enemy { // TODO Implement the other classes this one needs
             }
         }, 0, (int) Math.abs(seconds * 1000));
     }
+    
+    public void pauseTimer() {
+    	enemyTimer.cancel(); // hello
+    }
 
+    
+    
     boolean isEnemyAlive() {
         // TODO implement logic: If Enemy == dead --> enemyTimer.cancel()
         return true; //! Change this later
