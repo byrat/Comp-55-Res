@@ -28,8 +28,15 @@ public class Health {
 	
 	public GImage decreasedHealthBar() {
 		secondHealth = new GImage("media/Health/decreasedHealthBar.png", 700, 800);
-		secondHealth.setSize(5800, 5800);
+		secondHealth.setSize(200, 300);
 		return secondHealth;
 		
+	}
+	
+	public void show() {
+		app.add(firstHealth);
+	}
+	public void hide() {
+		app.remove(firstHealth);
 	}
 }
