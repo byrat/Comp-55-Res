@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,6 +32,8 @@ public class Projectiles {
 	private double seconds = 0.1;
 	private int updateTime = (int) Math.abs(seconds * 1000);
 	
+	ArrayList<Enemy> enemiesArr;
+	
 	public Projectiles(MainApplication app, Location position, Location target, double speed, String spriteString, boolean isPlayerShooting) {
 		this.app = app;
 		this.positon = position;
@@ -38,6 +41,7 @@ public class Projectiles {
 		this.target = target;
 		this.isPlayer = false;
 		this.isPlayerShooting = isPlayerShooting;
+		enemiesArr = app.getGame().getEnemyArr();
 		
 		
 		slopeNum = target.getYAxis() - start.getYAxis();
@@ -73,7 +77,8 @@ public class Projectiles {
 					hide();
 					player.decrementHeatlh();
 				} else if (detectCollision(true) == true && isPlayerShooting == true) { // player is shooting at enemies
-					// kill enemy here
+					
+					System.out.println("Enemy was hit");
 					projectileTimer.cancel();
 					hide();
 				}
@@ -117,14 +122,15 @@ public class Projectiles {
 	}
 	
 	public boolean detectCollision(boolean isPlayer) {
+		double spriteLeftSideX= Math.floor(sprite.getLocation().getX() - 1);
+		
+		
+		double spriteTopCornerY = Math.floor(sprite.getLocation().getY());
+		double spriteMiddleY = Math.floor(sprite.getLocation().getY() + (sprite.getHeight() / 2));
+		double spriteBottomCornerY = Math.floor(sprite.getLocation().getY() + sprite.getHeight());
+		
 		if (isPlayer == false) { // player is the one being targeted
-			double spriteLeftSideX= Math.floor(sprite.getLocation().getX() - 1);
-			double spriteRightSideX = Math.floor((sprite.getLocation().getX() + sprite.getWidth()) + 1);
-			
-			double spriteTopCornerY = Math.floor(sprite.getLocation().getY());
-			double spriteMiddleY = Math.floor(sprite.getLocation().getY() + (sprite.getHeight() / 2));
-			double spriteBottomCornerY = Math.floor(sprite.getLocation().getY() + sprite.getHeight());
-			
+			double spriteRightSideX = Math.floor((sprite.getLocation().getX() + sprite.getWidth()) + 10);
 			if (player.getImage().contains(spriteLeftSideX, spriteTopCornerY) ||
 					player.getImage().contains(spriteLeftSideX, spriteMiddleY) || 
 					player.getImage().contains(spriteLeftSideX, spriteBottomCornerY) ||
@@ -134,7 +140,27 @@ public class Projectiles {
 				return true;
 			}
 		} else {
-			;
+			for (Enemy e:enemiesArr) {
+				boolean flag = false;
+				double spriteRightSideX = Math.floor((sprite.getLocation().getX() + sprite.getWidth()) - 10);
+				if (e.getImage().contains(spriteLeftSideX, spriteTopCornerY) ||
+						e.getImage().contains(spriteLeftSideX, spriteMiddleY) || 
+						e.getImage().contains(spriteLeftSideX, spriteBottomCornerY) ||
+						e.getImage().contains(spriteRightSideX, spriteTopCornerY) ||
+						e.getImage().contains(spriteRightSideX, spriteMiddleY) ||
+						e.getImage().contains(spriteRightSideX, spriteBottomCornerY))  {
+					e.decrementHealth();
+					if (e.getHealth() == 0) {
+						System.out.println("Enemy is dead!");
+						e.pauseTimer();
+						app.remove(e.getImage());
+						flag = true;
+						enemiesArr.remove(e);
+					}
+					return true;
+				}
+				
+			}
 		}
 		
 		return false;

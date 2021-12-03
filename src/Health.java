@@ -9,7 +9,6 @@ public class Health {
 	private Player player;
 	private GImage firstHealth, secondHealth, thirdHealth;
 	private MainApplication app;
-	private int hitCount;
 	
 	
 	public Health(MainApplication app, int health,int x, int y, Player player) {
@@ -20,26 +19,15 @@ public class Health {
 		firstHealth.setSize(140, 225);
 	}
 	
-	public void playerGetsHitOnce() {
+	public void playerGetsHit() {
 		if(isHit.detectCollision(isHit.getIsPlayer()) == true) {
 			player.decrementHeatlh();
 			secondHealth = new GImage("media/Health/DecreasedHealthBar-removebg-preview.png", 700, 800);
 			secondHealth.setLocation(140, 225);
 			secondHealth.setSize(140, 225);
-			hitCount++;
 		}
 	}
 	
-	private void playerGetsHitTwice() {
-		if ((isHit.detectCollision(isHit.getIsPlayer()) == true) && hitCount == 1) {
-			player.decrementHeatlh();
-			thirdHealth = new GImage("media/Health/OneLifeRemaining-removebg-preview.png", 700, 800);
-			thirdHealth.setLocation(140, 225);
-			thirdHealth.setSize(140, 225);
-			hitCount++;
-		}
-	}
-
 	
 	
 	public GImage decreasedHealthBar() {
@@ -51,12 +39,8 @@ public class Health {
 	
 	public void show() {
 		app.add(firstHealth);
-		app.add(secondHealth);
-		app.add(thirdHealth);
 	}
 	public void hide() {
 		app.remove(firstHealth);
-		app.remove(secondHealth);
-		app.remove(thirdHealth);
 	}
 }
