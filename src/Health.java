@@ -1,4 +1,5 @@
 import acm.graphics.GImage;
+//import jdk.javadoc.internal.doclets.toolkit.BaseConfiguration;
 
 public class Health {
 	//Gimage of health bar: one full bar, decreasing bar
@@ -10,9 +11,8 @@ public class Health {
 	private MainApplication app;
 	
 	
-	public Health(MainApplication app, int health,int x, int y) {
+	public Health(MainApplication app, int health,int x, int y, Player player) {
 		this.app = app;
-		player = new Player(app, health, health, health, health);
 		player.setHealth(health);
 		firstHealth = new GImage("media/Health/FullHealthBar-removebg-preview.png", 700 , 800);
 		firstHealth.setLocation(x, y);
@@ -22,6 +22,9 @@ public class Health {
 	public void playerGetsHit() {
 		if(isHit.detectCollision(isHit.getIsPlayer()) == true) {
 			player.decrementHeatlh();
+			secondHealth = new GImage("media/Health/DecreasedHealthBar-removebg-preview.png", 700, 800);
+			secondHealth.setLocation(140, 225);
+			secondHealth.setSize(140, 225);
 		}
 	}
 	
