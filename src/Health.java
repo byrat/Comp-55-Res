@@ -6,35 +6,37 @@ public class Health {
 	//if player gets hit, health needs to decrease
 	
 	private Projectiles isHit;
-	private Player player;
+	//private Player player;
 	private GImage firstHealth, secondHealth, thirdHealth;
-	private MainApplication app;
+	static MainApplication app;
 	
 	
 	public Health(MainApplication app, int health,int x, int y, Player player) {
 		this.app = app;
 		player.setHealth(health);
-		firstHealth = new GImage("media/Health/FullHealthBar-removebg-preview.png", 700 , 800);
+		firstHealth = new GImage("media/Health/FullHealthBar.png", 700 , 800);
 		firstHealth.setLocation(x, y);
 		firstHealth.setSize(140, 225);
 	}
 	
-	public void playerGetsHit() {
+	public void playerGetsHitOnce(Player player) {
 		if(isHit.detectCollision(isHit.getIsPlayer()) == true) {
 			player.decrementHeatlh();
-			secondHealth = new GImage("media/Health/DecreasedHealthBar-removebg-preview.png", 700, 800);
+			secondHealth = new GImage("media/Health/DecreasedHealthBar.png", 700, 800);
 			secondHealth.setLocation(140, 225);
 			secondHealth.setSize(140, 225);
+//			System.out.println("picture printed");
 		}
 	}
 	
-	
-	
-	public GImage decreasedHealthBar() {
-		secondHealth = new GImage("media/Health/decreasedHealthBar.png", 700, 800);
-		secondHealth.setSize(200, 300);
-		return secondHealth;
-		
+	public void playerGetsHitTwice(Player player) {
+		if(isHit.detectCollision(isHit.getIsPlayer()) == true) { // removed isHit.getIsPlayer before == true
+			player.decrementHeatlh();
+			thirdHealth = new GImage("media/Health/OneLifeRemaining.png", 700, 800);
+			thirdHealth.setLocation(140, 225);
+			thirdHealth.setSize(140, 225);
+//			System.out.println("picture also printed");
+		}
 	}
 	
 	public void show() {
@@ -43,4 +45,36 @@ public class Health {
 	public void hide() {
 		app.remove(firstHealth);
 	}
+	
+	
+	
+//	public GImage decreasedHealthBar() {
+//		secondHealth = new GImage("media/Health/decreasedHealthBar.png", 700, 800);
+//		secondHealth.setSize(200, 300);
+//		return secondHealth;
+//	}
+	
+//	public void showFirstHealth() {
+//		app.add(firstHealth);
+//	}
+//	public void hideFirstHealth() {
+//		app.remove(firstHealth);
+//	}
+//	public void showSecondHealth() {
+//		app.add(secondHealth);
+//	}
+//	public void hideSecondHealth() {
+//		app.remove(secondHealth);
+//	}
+//	public void showThirdHealth() {
+//		app.add(thirdHealth);
+//	}
+//	public void hideThirdHealth() {
+//		app.remove(thirdHealth);
+//	}
+	
+//	public static void main(String[] args) {
+//		//Player player = new Player(app,0,510,600,50);
+//		Player player = new Player(app, 0, 510, 600, 50);
+//	}
 }
