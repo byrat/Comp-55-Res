@@ -26,7 +26,17 @@ public class Health {
 			secondHealth.setLocation(140, 225);
 			secondHealth.setSize(140, 225);
 //			System.out.println("picture printed");
+//			System.out.println("picture did not print");
+
 		}
+	}
+	
+
+	public void show() {
+		app.add(firstHealth);
+	}
+	public void hide() {
+		app.remove(firstHealth);
 	}
 	
 	public void playerGetsHitTwice(Player player) {
@@ -38,14 +48,6 @@ public class Health {
 //			System.out.println("picture also printed");
 		}
 	}
-	
-	public void show() {
-		app.add(firstHealth);
-	}
-	public void hide() {
-		app.remove(firstHealth);
-	}
-	
 	
 	
 //	public GImage decreasedHealthBar() {
