@@ -26,6 +26,8 @@ public class Projectiles {
 	
 	private boolean isPlayerShooting;
 	
+	private Health health;
+	
 	MainApplication app;
 	Player player;
 	Timer projectileTimer;
@@ -75,7 +77,8 @@ public class Projectiles {
 					System.out.println("Detected Collision");
 					projectileTimer.cancel();
 					hide();
-					player.decrementHeatlh();
+					health = new Health(app, player.getHealth(), 1100, -88, player);
+					// player.decrementHeatlh(); will add this line in health class so don't need to repeat it
 				} else if (detectCollision(true) == true && isPlayerShooting == true) { // player is shooting at enemies
 					
 					System.out.println("Enemy was hit");
