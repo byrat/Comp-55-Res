@@ -169,6 +169,7 @@ public class Player {
 	
 	public void updateXVel(double x) {
 //		System.out.println("player x velocity updated with " + x + "\n");
+		//JT
 		
 		if(dx == 0) {
 			if(x > 0) {
