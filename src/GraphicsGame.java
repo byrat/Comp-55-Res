@@ -24,6 +24,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Collection CollectionMenu;
 	Player player;
 	ArrayList<Enemy> arrayOfEnemies = new ArrayList<Enemy>();
+	boolean flagForEasy, flagForMedium, flagForHard, flagForBoss = false;
+	int easyCounter, mediumCounter, hardCounter, bossCounter = 0;
 	Health health;
 	Timer timer;
 	Weapon weapon;
@@ -297,7 +299,28 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		int result2 = r2.nextInt(high2-low2) + low2;
 		
 		// ADDS NEW ENEMIES TO WAVE
-		arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.EASY, false));
+		if (flagForEasy == false) {
+			arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.EASY, false));
+			easyCounter++;
+			if (easyCounter == 3) { flagForEasy = true; }
+		} else if (flagForMedium == false) {
+			arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.MEDIUM, false));
+			mediumCounter++;
+			if (mediumCounter == 3) { flagForMedium = true; }
+		} else if (flagForHard == false) {
+			arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.HARD, false));
+			hardCounter++;
+			if (hardCounter == 3) { flagForHard = true; }
+		} else if (flagForBoss == false) {
+			arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.EASY, true));
+			bossCounter++;
+			if (bossCounter == 1) { flagForBoss = true; }
+		}
+		
+		if (flagForEasy == true && flagForMedium == true && flagForHard == true && flagForBoss) {
+			;
+		}
+		
 //		arrayOfEnemies.add(new Enemy(program, new Location(result2, 540), Difficulty.EASY, false));
 	}
 	

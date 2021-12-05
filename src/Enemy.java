@@ -51,18 +51,18 @@ public class Enemy { // TODO Implement the other classes this one needs
                 enemySprite = new GImage(IMG_PATH + "hunter medium" + IMG_PNG_SUFFIX);
                 enemySprite.scale(0.15);
                 seconds = 1;
-                health = 2;
+                health = 1;
             } else if (difficulty == Difficulty.HARD) {
                 enemySprite = new GImage(IMG_PATH + "hunter hard" + IMG_PNG_SUFFIX);
                 enemySprite.scale(0.5);
                 seconds = 0.75;
-                health = 3;
+                health = 1;
             } 
         } else {
             enemySprite = new GImage(IMG_PATH + "bossSprite" + IMG_PNG_SUFFIX);
             enemySprite.scale(0.5);
             seconds = 0.15;
-            health = 10;
+            health = 5;
         }
         
         enemySprite.setLocation(enemyLocation.getXAxis(), enemyLocation.getYAxis());
