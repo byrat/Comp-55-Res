@@ -36,6 +36,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	private GImage Background;
 	private int counter = 0;
 	private GRect FLOOR_1,FLOOR_2, FLOOR_2_1, FLOOR_3,FLOOR_4,FLOOR_4_1,FLOOR_4_2, FLOOR_5, FLOOR_6, FLOOR_7;
+	private int jumpCool;
+	private boolean jumpC = false;
 	
 	public static final int MAP_WIDTH = 9174;//800;
 	public static final int MAP_HEIGHT = 3018;//600;
@@ -340,6 +342,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 			}
 			
 		}
+		if(player.getHasJumped() == true) {
+			if( counter % 38 == 0) {
+				player.setHasJumped(false);
+			}
+			else {
+				player.setHasJumped(true);
+			}
+		}
 		return;
 	}
 		
@@ -349,19 +359,21 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT) {
 			player.setPlayerDirectionSprite(Direction.EAST);
+			player.movePlayer(5, 0);
 			player.updateXVel(2);
 			checkOOB();
 		}
 			
 		else if (key == KeyEvent.VK_LEFT) {
 			player.setPlayerDirectionSprite(Direction.WEST);
+			player.movePlayer(-5, 0);
 			player.updateXVel(-2);
 			checkOOB();	
 		}
 		if (key == KeyEvent.VK_SPACE) {
-			if(!player.getHasJumped()) {
+			if(player.getHasJumped() == false) {
 				player.updateYVel(-30.0);
-				player.setHasJumped(true);
+				player.setHasJumped(true);	
 			}
 			return;			
 		}

@@ -156,7 +156,7 @@ public class Player {
 	}
 		
 		if(dy <= -10 && hasJumped == true) {
-			hasJumped = false;
+			hasJumped = true;
 		}
 		image.move(dx, dy);
 		isMoving = false;
