@@ -26,7 +26,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	ArrayList<Enemy> arrayOfEnemies = new ArrayList<Enemy>();
 	boolean flagForEasy, flagForMedium, flagForHard, flagForBoss = false;
 	int easyCounter, mediumCounter, hardCounter, bossCounter = 0;
-	Health health;
+//	Health health;
 	Timer timer;
 	Weapon weapon;
 	Location loc;
@@ -125,9 +125,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		bounds.add(FLOOR_2);
 		
 		///this.CollectionMenu = collection;
-		player = new Player (program , 0 ,510 ,600 ,50);
+		player = new Player (program , 0 ,510,3 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
-		health = new Health(program, 3, 1100, -88, player);
+//		health = new Health(program, 3, 1100, -88, player);
 //		health.playerGetsHitOnce(player);
 //		health.playerGetsHitTwice(player);
 		
@@ -207,7 +207,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		player.show();
 		weapon.show();
-		health.showFirstHealth();
+		player.showHealth();
+//		health.showFirstHealth();
 		
 		timer = new Timer (10 , this);
 		timer.start();
