@@ -12,7 +12,7 @@ public class Player {
 	public static final String VERTICAL_IMG_FILENAME = "_vert";
 
 
-	private int health;
+	private int health = 3;
 	private int ammo;
 	private int x = 0;
 	private int y = 0;
@@ -27,6 +27,7 @@ public class Player {
 	private double maxDY;
 	
 	private GImage image;
+	GImage healthImg = new GImage("media/Health/FullHealthBar-removebg-preview.png");
 	Direction playerDirection;
 	
 	private boolean canShoot = true;
@@ -42,6 +43,9 @@ public class Player {
 		image = new GImage("media/characters/monkey_east.png", x , y);
 		playerDirection = Direction.EAST;
 		image.setSize(100,100);
+		
+		healthImg.setLocation(1100, -88);
+		
 		// EACH BLOCK IN MAP IS ABOUT 20 PX. -JT
 		//image.setLocation(0, 510);
 		maxDX = 8;
@@ -54,6 +58,12 @@ public class Player {
 		dx = dy = 0;
 		
 	}
+	
+	public void showHealth() { // added this
+		program.add(healthImg); // weeeee
+	} // wowwwwww
+	
+	
 	public double getX() {
 		return image.getX();
 	}
@@ -120,7 +130,26 @@ public class Player {
 	
 	public int getHealth() { return health; }
 	
-	public void decrementHealth() { health--; }
+	public void decrementHealth() {
+		System.out.println("Health Before --: " + health);
+		health--;
+		System.out.println("Health After --: " + health);
+		System.out.println("DECREMEMNT HEALTH");
+		System.out.println();
+		if (getHealth() == 2) {
+			program.remove(healthImg);
+			healthImg = new GImage("media/Health/DecreasedHealthBar-removebg-preview.png");
+			healthImg.setLocation(1100, -88);
+			program.add(healthImg);
+		} else if (getHealth() == 1) {
+			program.remove(healthImg);
+			healthImg = new GImage("media/Health/OneLifeRemaining-removebg-preview.png");
+			healthImg.setLocation(1100, -88);
+			program.add(healthImg);
+		} else if (getHealth() == 0) {
+			
+		}
+	}
 	
 	public void setAmmo (int ammo) {
 		this.ammo = ammo;
