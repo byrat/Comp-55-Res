@@ -75,9 +75,11 @@ public class Projectiles {
 					System.out.println("Projectile Flew Out of Bounds");
 				} else if (detectCollision(false) == true && isPlayerShooting == false) { // Enemy shot at player
 					System.out.println("Detected Collision");
+					health = new Health(app, player.getHealth(), 1100, -88, player);
+					System.out.println("health");
 					projectileTimer.cancel();
 					hide();
-					health = new Health(app, player.getHealth(), 1100, -88, player);
+					//health = new Health(app, player.getHealth(), 1100, -88, player);
 					// player.decrementHeatlh(); will add this line in health class so don't need to repeat it
 				} else if (detectCollision(true) == true && isPlayerShooting == true) { // player is shooting at enemies
 					
