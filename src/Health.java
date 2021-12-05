@@ -22,7 +22,7 @@ public class Health {
 			showFirstHealth();
 		}
 		else if(player.getHealth() == 2) {
-			hideFirstHealth();
+			//hideFirstHealth();
 			secondHealth = new GImage("media/Health/DecreasedHealthBar.png", 700, 800);
 			secondHealth.setLocation(x, y);
 			secondHealth.setSize(140, 225);
@@ -30,7 +30,7 @@ public class Health {
 			showSecondHealth();
 		}
 		else if(player.getHealth() == 1) {
-			hideSecondHealth();
+			//hideSecondHealth();
 			thirdHealth = new GImage("media/Health/OneLifeRemaining.png", 700, 800);
 			thirdHealth.setLocation(x, y);
 			thirdHealth.setSize(140, 225);
