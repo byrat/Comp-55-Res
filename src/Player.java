@@ -1,6 +1,8 @@
 import javax.print.attribute.standard.Media;
 
 import acm.graphics.GImage;
+import acm.graphics.GLabel;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -151,6 +153,10 @@ public class Player {
 		}
 	}
 	
+	
+	
+    
+   
 	public void setAmmo (int ammo) {
 		this.ammo = ammo;
 	}

@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import acm.graphics.GLabel;
 import acm.graphics.GPoint;
+import acm.graphics.GProgram;
 import acm.program.GraphicsProgram;
+import acm.program.Program;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +29,9 @@ public class Enemy { // TODO Implement the other classes this one needs
     private GImage enemySprite;
     private String IMG_PATH = "media/characters/";
     private String IMG_PNG_SUFFIX = ".png";
+    
+    private GLabel scoreCount;
+    
     
     private double seconds;
 
@@ -117,6 +122,28 @@ public class Enemy { // TODO Implement the other classes this one needs
     public void hide() {
     	app.remove(enemySprite);
     }
+    
+
+    	
+    public void showScore() {
+    	if (isEnemyAlive() == false) {
+    		
+    		int enemyDeathCounter = 0;
+    		scoreCount = new GLabel("Score: " + enemyDeathCounter);
+    		enemyDeathCounter++;
+    		app.add(scoreCount);
+    		app.setSize(300, 300);
+    		GProgram gProgram = new GProgram();
+			gProgram.add(scoreCount);
+       	}	
+	
+  
+    	
+    }
+    
+    
+    
+    
     
 //    public static void main(String[] args) {
 //        // Test Code

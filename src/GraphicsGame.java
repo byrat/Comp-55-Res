@@ -226,6 +226,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.showHealth();
 //		health.showFirstHealth();
 		
+		
 		timer = new Timer (10 , this);
 		timer.start();
 		
