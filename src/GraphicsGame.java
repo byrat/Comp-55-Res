@@ -286,8 +286,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public void wave() {
 		// CREATE LEFT SIDE SPAWN
 		Random r = new Random();
-		int low = 0;
-		int high = 300;
+		int low = 1400;
+		int high = 1800;
 		int result = r.nextInt(high-low) + low;
 		
 		//  CREATE RIGHT SIDE SPAWN
@@ -298,7 +298,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		// ADDS NEW ENEMIES TO WAVE
 		arrayOfEnemies.add(new Enemy(program, new Location(result, 540), Difficulty.EASY, false));
-		arrayOfEnemies.add(new Enemy(program, new Location(result2, 540), Difficulty.EASY, false));
+//		arrayOfEnemies.add(new Enemy(program, new Location(result2, 540), Difficulty.EASY, false));
 	}
 	
 
@@ -309,7 +309,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.updateYVel(2);
 		getBounds();
 		player.update();
-		if( counter % 100 == 0) {
+		if( counter % 600 == 0) {
 			wave();
 			for (Enemy enem:arrayOfEnemies) {
 				enem.show();
@@ -350,13 +350,13 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 				if (player.getDirection() == Direction.EAST) {
 					Location targetLocation = new Location(1920, (int)player.getImage().getY());
 					new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
-					System.out.println("Created Monkey Bullet");
-					System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
+//					System.out.println("Created Monkey Bullet");
+//					System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
 				} else if (player.getDirection() == Direction.WEST) {
 					Location targetLocation = new Location(0, (int)player.getImage().getY());
 					new Projectiles(program, originLocation, targetLocation, 2, "banana_b", true);
-					System.out.println("Created Monkey Bullet");
-					System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
+//					System.out.println("Created Monkey Bullet");
+//					System.out.println("Monkey Location: x= " + player.getImage().getX() + " y=" + player.getImage().getY());
 					
 				}
 			}
