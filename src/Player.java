@@ -176,7 +176,7 @@ public class Player {
 				dx = 3;
 			}
 			else {
-				dx = 3;
+				dx = -3;
 			}
 
 		}

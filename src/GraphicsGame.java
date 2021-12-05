@@ -327,14 +327,12 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		if(key == KeyEvent.VK_RIGHT) {
 			player.setPlayerDirectionSprite(Direction.EAST);
 			player.updateXVel(2);
-			player.movePlayer(validMoveRight(DISTANCE_X),0);
 			checkOOB();
 		}
 			
 		else if (key == KeyEvent.VK_LEFT) {
 			player.setPlayerDirectionSprite(Direction.WEST);
 			player.updateXVel(-2);
-			player.movePlayer(validMoveLeft(DISTANCE_X),0);
 			checkOOB();	
 		}
 		if (key == KeyEvent.VK_SPACE) {
