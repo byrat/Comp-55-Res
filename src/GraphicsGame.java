@@ -224,6 +224,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.show();
 		weapon.show();
 		player.showHealth();
+		//arrayOfEnemies.add(new Enemy showScore();
+		//need to figure out how to show enemy score
+		
 //		health.showFirstHealth();
 		
 		
