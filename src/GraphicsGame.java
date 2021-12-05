@@ -4,10 +4,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
 import acm.graphics.GImage;
@@ -31,6 +34,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Weapon weapon;
 	Location loc;
 	MainApplication program;
+	Music music;
 	private Projectiles projectile;
 	
 	private GImage Background;
@@ -127,6 +131,18 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		///this.CollectionMenu = collection;
 		player = new Player (program , 0 ,510,3 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
+		try {
+			music = new Music(program);
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		health = new Health(program, 3, 1100, -88, player);
 //		health.playerGetsHitOnce(player);
 //		health.playerGetsHitTwice(player);
@@ -331,6 +347,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		music.play();
 		counter++;
 		player.updateYVel(2);
 		getBounds();
