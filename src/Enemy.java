@@ -33,9 +33,9 @@ public class Enemy { // TODO Implement the other classes this one needs
     private GImage enemySprite;
     private String IMG_PATH = "media/characters/";
     private String IMG_PNG_SUFFIX = ".png";
-    private int enemyDeathCounter = 0;
-    
-    GLabel scoreCount = new GLabel("Score: 0");
+//    private int enemyDeathCounter = 0;
+//    
+//    GLabel scoreCount = new GLabel("Score: 0");
     
     
     private double seconds;
@@ -49,8 +49,8 @@ public class Enemy { // TODO Implement the other classes this one needs
     	this.app = app;
         // firingRate = 1 * difficulty=0.75 ==> 0.75sec
         this.firingRate = firingRate * difficulty.Difficulty();
-        scoreCount.setLocation(1100, -800);
-        scoreCount.setColor(Color.red);
+//        scoreCount.setLocation(1100, -800);
+//        scoreCount.setColor(Color.red);
         
         if (isBoss == false) {
         	//?? I NEED TO ADD GETDIFFICULTY LATER ON - JT
@@ -132,17 +132,17 @@ public class Enemy { // TODO Implement the other classes this one needs
     
 
     	
-    public void showScore() {
-    	if (isEnemyAlive() == false) {
-    		enemyDeathCounter++;
-    		scoreCount = new GLabel("Score: " + enemyDeathCounter);
-    		app.add(scoreCount);
-			// keep score of how many enemies are killed
-			// create GLabel and make a counter
-			// each time enemy dies, update that
-       	}	
-    	
-    }
+//    public void showScore() {
+//    	if (isEnemyAlive() == false) {
+//    		enemyDeathCounter++;
+//    		scoreCount = new GLabel("Score: " + enemyDeathCounter);
+//    		app.add(scoreCount);
+//			// keep score of how many enemies are killed
+//			// create GLabel and make a counter
+//			// each time enemy dies, update that
+//       	}	
+//    	
+//    }
     
     
     

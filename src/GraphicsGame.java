@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
 import acm.graphics.GImage;
+import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import acm.graphics.GRect;
 import acm.graphics.GRectangle;
@@ -42,6 +44,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	private GRect FLOOR_1,FLOOR_2, FLOOR_2_1, FLOOR_3,FLOOR_4,FLOOR_4_1,FLOOR_4_2, FLOOR_5, FLOOR_6, FLOOR_7;
 	private int jumpCool;
 	private boolean jumpC = false;
+	GLabel scoreCount;
+	
 	
 	public static final int MAP_WIDTH = 9174;//800;
 	public static final int MAP_HEIGHT = 3018;//600;
@@ -113,24 +117,29 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 	
 		
-		FLOOR_1.setVisible(true);
-		FLOOR_2.setVisible(true);
-		FLOOR_2_1.setVisible(true);
-		FLOOR_3.setVisible(true);
-		FLOOR_4.setVisible(true);
-		FLOOR_4_1.setVisible(true);
-		FLOOR_4_2.setVisible(true);
-		FLOOR_5.setVisible(true);
-		FLOOR_6.setVisible(true);
-		FLOOR_7.setVisible(true);
+		FLOOR_1.setVisible(false);
+		FLOOR_2.setVisible(false);
+		FLOOR_2_1.setVisible(false);
+		FLOOR_3.setVisible(false);
+		FLOOR_4.setVisible(false);
+		FLOOR_4_1.setVisible(false);
+		FLOOR_4_2.setVisible(false);
+		FLOOR_5.setVisible(false);
+		FLOOR_6.setVisible(false);
+		FLOOR_7.setVisible(false);
 		
 		
 		bounds.add(FLOOR_1);
 		bounds.add(FLOOR_2);
 		
+		
 		///this.CollectionMenu = collection;
 		player = new Player (program , 0 ,510,3 ,50);
 		weapon = new Weapon(program, 1,"banana.png"); //CHANGE ONCE RESCALED - JT
+		scoreCount = new GLabel("Score: " + player.getScore());
+		scoreCount.setLocation(10,50);
+		scoreCount.setFont(Font.SERIF);
+		scoreCount.scale(5, 5);
 		try {
 			music = new Music(program);
 		} catch (UnsupportedAudioFileException e) {
@@ -219,11 +228,14 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		program.add(FLOOR_6);
 		program.add(FLOOR_7);
 		
+		program.add(scoreCount);
+		
 	
 		
 		player.show();
 		weapon.show();
 		player.showHealth();
+		//player.showScore();
 		//arrayOfEnemies.add(new Enemy showScore();
 		//need to figure out how to show enemy score
 		
@@ -235,10 +247,10 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		
 		///enemy1.show();
 		
-//		for (Enemy e:arrayOfEnemies) {
-//			e.show();
-//			e.startTimer();
-//		}
+		for (Enemy e:arrayOfEnemies) {
+			e.show();
+			e.startTimer();
+		}
 		
 		///Start game loop
 		

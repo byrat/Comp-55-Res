@@ -85,6 +85,7 @@ public class Projectiles {
 				} else if (detectCollision(true) == true && isPlayerShooting == true) { // player is shooting at enemies
 					
 					System.out.println("Enemy was hit");
+					player.increaseScore();
 					projectileTimer.cancel();
 					hide();
 				}

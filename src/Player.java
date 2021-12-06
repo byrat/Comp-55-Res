@@ -3,6 +3,7 @@ import javax.print.attribute.standard.Media;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 
+import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,7 +14,7 @@ public class Player {
 	public static final String IMG_EXTENSION = ".png";
 	public static final String VERTICAL_IMG_FILENAME = "_vert";
 
-
+   
 	private int health = 3;
 	private int ammo;
 	private int x = 0;
@@ -30,6 +31,8 @@ public class Player {
 	
 	private GImage image;
 	GImage healthImg = new GImage("media/Health/FullHealthBar-removebg-preview.png");
+	public int enemyDeathCounter = 0; 
+	//GLabel scoreCount = new GLabel("Score: " + enemyDeathCounter, 10, 10);
 	Direction playerDirection;
 	
 	private boolean canShoot = true;
@@ -48,6 +51,10 @@ public class Player {
 		
 		healthImg.setLocation(1100, -88);
 		
+//		scoreCount.setLocation(500, -80);
+//		scoreCount.setVisible(true);
+	    //scoreCount.setColor(Color.red);
+		
 		// EACH BLOCK IN MAP IS ABOUT 20 PX. -JT
 		//image.setLocation(0, 510);
 		maxDX = 8;
@@ -59,6 +66,16 @@ public class Player {
 		hasJumped = false;
 		dx = dy = 0;
 		
+	}
+	public int getScore() {
+		return enemyDeathCounter;
+		// keep score of how many enemies are killed
+		// create GLabel and make a counter
+		// each time enemy dies, update that
+    }
+	
+	public void increaseScore() {
+		enemyDeathCounter++;
 	}
 	
 	public void showHealth() { // added this
