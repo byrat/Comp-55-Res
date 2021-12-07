@@ -44,7 +44,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	private GRect FLOOR_1,FLOOR_2, FLOOR_2_1, FLOOR_3,FLOOR_4,FLOOR_4_1,FLOOR_4_2, FLOOR_5, FLOOR_6, FLOOR_7;
 	private int jumpCool;
 	private boolean jumpC = false;
-	GLabel scoreCount;
+	private GLabel scoreCount;
 	
 	
 	public static final int MAP_WIDTH = 9174;//800;
@@ -70,6 +70,9 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	public boolean [] getLog() {
 		return FruitLog;
 	}
+	
+	public GLabel getScoreLabel() { return scoreCount; } 
+	
 	GraphicsGame(CollectionMenu collection, MainApplication  program){
 		bounds = new ArrayList<GRect>();
 		

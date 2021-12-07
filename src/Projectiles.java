@@ -72,9 +72,9 @@ public class Projectiles {
 						sprite.getLocation().getX() > 1920 || sprite.getLocation().getY() > 1080) {
 					projectileTimer.cancel();
 					hide();
-					System.out.println("Projectile Flew Out of Bounds");
+//					System.out.println("Projectile Flew Out of Bounds");
 				} else if (detectCollision(false) == true && isPlayerShooting == false) { // Enemy shot at player
-					System.out.println("Detected Collision");
+//					System.out.println("Detected Collision");
 //					health = new Health(app, player.getHealth(), 1100, -88, player);
 					player.decrementHealth();
 //					System.out.println("health");
@@ -84,8 +84,8 @@ public class Projectiles {
 					// player.decrementHeatlh(); will add this line in health class so don't need to repeat it
 				} else if (detectCollision(true) == true && isPlayerShooting == true) { // player is shooting at enemies
 					
-					System.out.println("Enemy was hit");
-					player.increaseScore();
+//					System.out.println("Enemy was hit");
+//					player.increaseScore();
 					projectileTimer.cancel();
 					hide();
 				}
@@ -163,6 +163,8 @@ public class Projectiles {
 						app.remove(e.getImage());
 						flag = true;
 						enemiesArr.remove(e);
+						player.increaseScore();
+						app.getGame().getScoreLabel().setLabel("Score: " + String.valueOf(player.getScore()));
 					}
 					return true;
 				}
