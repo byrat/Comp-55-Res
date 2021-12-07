@@ -175,10 +175,12 @@ public class Player {
 		health++;
 		System.out.println("Health After --: " + health);
 		System.out.println("INCREMENT HEALTH");
+		System.out.println("CURRENT:" + getHealth());
 		System.out.println();
 		if(getHealth() > 3) {
-			health =3;
+			setHealth(3);
 		}
+		System.out.println("CURRENT:" + getHealth());
 		if (getHealth() == 3) {
 			program.remove(healthImg);
 			healthImg = new GImage("media/Health/FullHealthBar-removebg-preview.png");
