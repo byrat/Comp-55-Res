@@ -105,7 +105,7 @@ public class Player {
 			public void run() {
 				counter++;
 				System.out.println("Counter = " + counter);
-				if (counter == 3) { // After 3 seconds, the player is allowed to shoot again
+				if (counter == 2) { // After 3 seconds, the player is allowed to shoot again
 					shootTimer.cancel();
 					Player.this.canShoot = true;
 				}
@@ -156,6 +156,36 @@ public class Player {
 		System.out.println("DECREMEMNT HEALTH");
 		System.out.println();
 		if (getHealth() == 2) {
+			program.remove(healthImg);
+			healthImg = new GImage("media/Health/DecreasedHealthBar-removebg-preview.png");
+			healthImg.setLocation(1100, -88);
+			program.add(healthImg);
+		} else if (getHealth() == 1) {
+			program.remove(healthImg);
+			healthImg = new GImage("media/Health/OneLifeRemaining-removebg-preview.png");
+			healthImg.setLocation(1100, -88);
+			program.add(healthImg);
+		} else if (getHealth() == 0) {
+			
+		}
+	}
+	
+	public void incrementHealth() {
+		System.out.println("Health Before --: " + health);
+		health++;
+		System.out.println("Health After --: " + health);
+		System.out.println("INCREMENT HEALTH");
+		System.out.println();
+		if(getHealth() > 3) {
+			health =3;
+		}
+		if (getHealth() == 3) {
+			program.remove(healthImg);
+			healthImg = new GImage("media/Health/FullHealthBar-removebg-preview.png");
+			healthImg.setLocation(1100, -88);
+			program.add(healthImg);
+		}
+		else if (getHealth() == 2) {
 			program.remove(healthImg);
 			healthImg = new GImage("media/Health/DecreasedHealthBar-removebg-preview.png");
 			healthImg.setLocation(1100, -88);

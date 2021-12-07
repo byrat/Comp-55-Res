@@ -164,6 +164,7 @@ public class Projectiles {
 						flag = true;
 						enemiesArr.remove(e);
 						player.increaseScore();
+						player.incrementHealth();
 						app.getGame().getScoreLabel().setLabel("Score: " + String.valueOf(player.getScore()));
 					}
 					return true;
