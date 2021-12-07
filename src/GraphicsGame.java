@@ -29,7 +29,11 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Collection CollectionMenu;
 	Player player;
 	ArrayList<Enemy> arrayOfEnemies = new ArrayList<Enemy>();
-	boolean flagForEasy, flagForMedium, flagForHard, flagForBoss = false;
+//	boolean flagForEasy, flagForMedium, flagForHard flagForBoss = false;
+	boolean flagForEasy = false;
+	boolean flagForMedium = false;
+	boolean flagForHard = false;
+	boolean flagForBoss = false;
 	int easyCounter, mediumCounter, hardCounter, bossCounter = 0;
 //	Health health;
 	Timer timer;
@@ -45,6 +49,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	private int jumpCool;
 	private boolean jumpC = false;
 	private GLabel scoreCount;
+	public boolean isPlayerDead = false;
 	
 	
 	public static final int MAP_WIDTH = 9174;//800;
@@ -72,6 +77,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	}
 	
 	public GLabel getScoreLabel() { return scoreCount; } 
+	
+	public void removeEverything() { program.removeAll(); }
 	
 	GraphicsGame(CollectionMenu collection, MainApplication  program){
 		bounds = new ArrayList<GRect>();
@@ -305,8 +312,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
         if(DISTANCE_X < 0) {
         	player.getImage().setLocation(0, player.getY());
         }
-        if(DISTANCE_X > 1270) { 
-        	player.getImage().setLocation(1270, player.getY());
+        if(DISTANCE_X > 850) { 
+        	player.getImage().setLocation(850, player.getY());
         }
     }
 	//
@@ -324,7 +331,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		return 7;
 	}
 	public void wave() {
-		// CREATE LEFT SIDE SPAWN
+		// CREATE LEFT SIDE SPAWN 
+		
 		Random r = new Random();
 		int low = 1400;
 		int high = 1600;
@@ -371,7 +379,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.updateYVel(2);
 		getBounds();
 		player.update();
-		if( counter % 150 == 0) {
+		if( counter % 600 == 0 && isPlayerDead == false) {
 			wave();
 			for (Enemy enem:arrayOfEnemies) {
 				enem.show();
@@ -393,6 +401,8 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if (isPlayerDead == true) { return; }
+		
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT) {
 			player.setPlayerDirectionSprite(Direction.EAST);
@@ -441,7 +451,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-//		System.out.println("x: "+ e.getX()+ ",y:" + e.getY());
+		System.out.println("x: "+ e.getX()+ ",y:" + e.getY());
 	}
 	public void getBounds() {
 		

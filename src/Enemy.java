@@ -70,14 +70,16 @@ public class Enemy { // TODO Implement the other classes this one needs
                 seconds = 0.75;
                 health = 1;
             } 
+            enemySprite.setLocation(enemyLocation.getXAxis() - 400, enemyLocation.getYAxis());
         } else {
             enemySprite = new GImage(IMG_PATH + "bossSprite" + IMG_PNG_SUFFIX);
             enemySprite.scale(0.5);
-            seconds = 0.15;
+            seconds = 0.50;
             health = 5;
+            enemySprite.setLocation(enemyLocation.getXAxis() - 400, enemyLocation.getYAxis() - 100);
         }
         //Enemy location
-        enemySprite.setLocation(enemyLocation.getXAxis() - 400, enemyLocation.getYAxis());
+       
   
     }
     
@@ -97,6 +99,13 @@ public class Enemy { // TODO Implement the other classes this one needs
                 	System.out.println("Player is dead");
                 	player.hide();
                 	enemyTimer.cancel();
+                	app.getGame().removeEverything();
+                	GImage gameOverLabel = new GImage("media/EndingMenu/dead_screen.png", 500, 400);
+                	app.add(gameOverLabel);
+                	app.getGame().isPlayerDead = true;
+                	for (Enemy e: app.getGame().getEnemyArr()) {
+                		e.pauseTimer();
+                	}
                 }
             }
         }, 0, (int) Math.abs(seconds * 1000));
