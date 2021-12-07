@@ -379,7 +379,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.updateYVel(2);
 		getBounds();
 		player.update();
-		if( counter % 600 == 0 && isPlayerDead == false) {
+		if( counter % 300 == 0 && isPlayerDead == false) {
 			wave();
 			for (Enemy enem:arrayOfEnemies) {
 				enem.show();
