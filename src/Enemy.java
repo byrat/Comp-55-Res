@@ -100,7 +100,7 @@ public class Enemy { // TODO Implement the other classes this one needs
                 	player.hide();
                 	enemyTimer.cancel();
                 	app.getGame().removeEverything();
-                	GImage gameOverLabel = new GImage("media/EndingMenu/dead_screen.png", 500, 400);
+                	GImage gameOverLabel = new GImage("media/EndingMenu/dead_screen.png", 270 , 270);
                 	app.add(gameOverLabel);
                 	app.getGame().isPlayerDead = true;
                 	for (Enemy e: app.getGame().getEnemyArr()) {
