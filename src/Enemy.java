@@ -76,8 +76,8 @@ public class Enemy { // TODO Implement the other classes this one needs
             seconds = 0.15;
             health = 5;
         }
-        
-        enemySprite.setLocation(enemyLocation.getXAxis(), enemyLocation.getYAxis());
+        //Enemy location
+        enemySprite.setLocation(enemyLocation.getXAxis() - 400, enemyLocation.getYAxis());
   
     }
     
