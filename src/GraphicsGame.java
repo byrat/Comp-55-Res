@@ -327,7 +327,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		// CREATE LEFT SIDE SPAWN
 		Random r = new Random();
 		int low = 1400;
-		int high = 1800;
+		int high = 1600;
 		int result = r.nextInt(high-low) + low;
 		
 		//  CREATE RIGHT SIDE SPAWN
@@ -371,7 +371,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 		player.updateYVel(2);
 		getBounds();
 		player.update();
-		if( counter % 600 == 0) {
+		if( counter % 150 == 0) {
 			wave();
 			for (Enemy enem:arrayOfEnemies) {
 				enem.show();

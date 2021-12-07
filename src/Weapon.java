@@ -17,6 +17,7 @@ public class Weapon{ //! Might have to extend Graphics Program
     	program = app;
         this.firingRate = firingRate;
         sprite = new GImage(WEAPON_FOLDER + weapon);
+        sprite.setLocation(-1000,-1000);
     }
 
     public GImage getWeaponSprite() {
