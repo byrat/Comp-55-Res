@@ -4,6 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 
+// TEST
 public class SettingsMenu extends GraphicsPane {
 	// you will use program to get access to all of the GraphicsProgram calls
 	Enemy enemy;
