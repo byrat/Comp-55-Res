@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.event.MouseEvent;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
@@ -116,29 +118,58 @@ public class SettingsMenu extends GraphicsPane {
 //		para.setText("you need\nto click\non the eyes\nto go back");
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == RETURN_BUTTON) {
-			program.switchToMenu();
+			//program.switchToMenu();
+			System.exit(1);
+			
 		}
 		if(obj == EASY) {
 			MEDIUM.setFillColor(Color.WHITE);
 			HARD.setFillColor(Color.WHITE);
 			EASY.setFillColor(new Color(255,225,53));
 			// PASS THIS VALUE TO WHERE DIFFICULTY IS DETERMINED
-			setDifficulty(Difficulty.EASY);
+			//setDifficulty(Difficulty.EASY);
+			try {
+				FileWriter easyOp = new FileWriter("media/dft");
+				easyOp.write("e");
+				easyOp.close();
+				System.out.println("acc 1");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 		else if(obj == MEDIUM) {
 			HARD.setFillColor(Color.WHITE);
 			EASY.setFillColor(Color.WHITE);
 			MEDIUM.setFillColor(new Color(255,225,53));
 			// PASS THIS VALUE TO WHERE DIFFICULTY IS DETERMINED
-			setDifficulty(Difficulty.MEDIUM);
-
+			//setDifficulty(Difficulty.MEDIUM);
+			try {
+				FileWriter medOp = new FileWriter("media/dft");
+				medOp.write("m");
+				medOp.close();
+				System.out.println("acc 2");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		else if(obj == HARD) {
 			MEDIUM.setFillColor(Color.WHITE);
 			EASY.setFillColor(Color.WHITE);
 			HARD.setFillColor(new Color(255,225,53));
 			// PASS THIS VALUE TO WHERE DIFFICULTY IS DETERMINED
-			setDifficulty(Difficulty.HARD);
+			//setDifficulty(Difficulty.HARD);
+			try {
+				FileWriter hardOp = new FileWriter("media/dft");
+				hardOp.write("h");
+				hardOp.close();
+				System.out.println("acc 2");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if(obj == FX_ON) {
 			FX_OFF.setFillColor(Color.WHITE);
