@@ -1,16 +1,6 @@
 {
-   "Character": [
-	
-      {
-         "xPos": "100",
-   	 	 "yPos": "200"
-      }
-   ],
-   
-   "Enemy": [
-   	{
-   		 "xPos": "1000",
-   	 	 "yPos": "2000"
-   	}
-   ]
+  "enemyXpos":"1000",
+  "enemyYpos":"2000",
+  "characterXpos":"100",
+  "characterYpos":"100"
 }
