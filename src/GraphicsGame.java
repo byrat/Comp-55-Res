@@ -43,7 +43,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Timer timer;
 	Weapon weapon;
 	Location loc;
-	MainApplication program;x`
+	MainApplication program;
 	Music music;
 	private Projectiles projectile;
 	

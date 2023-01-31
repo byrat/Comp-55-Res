@@ -21,4 +21,11 @@ public class fileReader {
 		}
 		return jsontxt;
 	}
+
+
+public static void main(String[] args) {
+		String strJson = getJsonInfo("C:\\Users\\Bryant Tran\\git\\groupproject-avengers\\src\\data.json");
+		System.out.println(strJson);
+	}
+	
 }
