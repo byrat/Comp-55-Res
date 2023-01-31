@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import java.io.*;
+import java.util.*;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
@@ -19,6 +22,7 @@ import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import acm.graphics.GRect;
 import acm.graphics.GRectangle;
+
 
 public class GraphicsGame extends GraphicsPane implements KeyListener, ActionListener {
 	boolean [] FruitLog = new boolean[4];
@@ -39,7 +43,7 @@ public class GraphicsGame extends GraphicsPane implements KeyListener, ActionLis
 	Timer timer;
 	Weapon weapon;
 	Location loc;
-	MainApplication program;
+	MainApplication program;x`
 	Music music;
 	private Projectiles projectile;
 	
